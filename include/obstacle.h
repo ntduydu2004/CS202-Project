@@ -1,10 +1,15 @@
 #pragma once
 #include <bits/stdc++.h>
+#include "raylib.h"
+using namespace std;
 // Vehicle
 //----------------------------------------------------------------------------------
 class Vehicle{
 protected:
+    Texture2D left;
+    Texture2D right;
 public:
+    
 };
 
 class Truck: public Vehicle{
@@ -23,10 +28,12 @@ public:
 // Animal
 //----------------------------------------------------------------------------------
 class Animal{
-private:
-
+protected:
+    Texture2D left;
+    Texture2D right;
+    
 public:
-
+    virtual void Draw(bool IsLeft) = 0;
 };
 
 class Bird{
