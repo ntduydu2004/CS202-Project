@@ -1,25 +1,36 @@
 #pragma once
 #include <bits/stdc++.h>
 #include "raylib.h"
+#include "Character.h"
 using namespace std;
-// Vehicle
-//----------------------------------------------------------------------------------
-class Vehicle{
-protected:
-    Texture2D left;
-    Texture2D right;
+
+
+class Obstacle {
+private:
+    Texture2D image;
+    int x, y;
+    int speed;
+
 public:
-    
+    Obstacle(int _x, int _y, int _speed, string texturePath);
+    ~Obstacle();
+    void soundOnImpact();
+
 };
 
-class Truck: public Vehicle{
+// Vehicle
+//----------------------------------------------------------------------------------
+
+class Truck: public Obstacle {
 private:
 
 public:
+    Truck();
+    ~Truck();
 };
 
 
-class Car: public Vehicle{
+class Car: public Obstacle {
 private:
 
 public:
@@ -27,23 +38,15 @@ public:
 
 // Animal
 //----------------------------------------------------------------------------------
-class Animal{
-protected:
-    Texture2D left;
-    Texture2D right;
-    
-public:
-    virtual void Draw(bool IsLeft) = 0;
-};
 
-class Bird{
+class Bird: public Obstacle {
 private:
 
 public:
 
 };
 
-class Elephant{
+class Elephant: public Obstacle {
 private:
 
 public:
