@@ -75,10 +75,10 @@ public:
     ~Menu();
     void DrawMainMenu();
     void DrawLevelMenu();
-    void DrawStatusMenu(); // appear if you lose/ want to exit
+    void DrawLosingMenu(); // appear if you lose
+    void DrawExitMenu();// appear if you want to exit
     void DrawScoreboard();
     void DrawEnterNamePhase();
-    void DrawLoadingPhase(); 
     void DrawInstructions();
     void DrawChooseCharacter();
     void DrawPlayGame();
