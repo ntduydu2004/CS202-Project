@@ -75,8 +75,8 @@ public:
     ~Menu();
     void DrawMainMenu();
     void DrawLevelMenu();
-    void DrawLosingMenu(); // appear if you lose
-    void DrawExitMenu();// appear if you want to exit
+    void DrawLoadGameWhilePlay(); // appear if you press T
+    void DrawSaveGameWhilePlay(); // appear if you press L
     void DrawScoreboard();
     void DrawEnterNamePhase();
     void DrawInstructions();
