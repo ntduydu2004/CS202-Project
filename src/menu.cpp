@@ -3,6 +3,7 @@
 using namespace std;
 Menu::~Menu(){
     UnloadTexture(background);
+    UnloadTexture(grass);
 }
 void Menu::DrawMainMenu(){
     if (CheckCollisionPointRec(mousePosition, rec_Mode[0]))
@@ -238,7 +239,7 @@ void Menu::DrawChooseCharacter(){
         if (CheckCollisionPointRec(mousePosition, rec_ChooseCharacter[0])) characterIndex = 0, indexTouch = 1;
         else if (CheckCollisionPointRec(mousePosition, rec_ChooseCharacter[1])) characterIndex = 1, indexTouch = 2;
         else if (CheckCollisionPointRec(mousePosition, rec_ChooseCharacter[2])) characterIndex = 2, indexTouch = 3;
-        // else if (CheckCollisionPointRec(mousePosition, rec_ChooseCharacter[3])) menu = 10; // game state
+        else if (CheckCollisionPointRec(mousePosition, rec_ChooseCharacter[3])) menu = 9; // game state
         else if (CheckCollisionPointRec(mousePosition, rec_ChooseCharacter[4])) menu = 6;
         else indexTouch = 0;
     }
@@ -274,6 +275,9 @@ void DrawLoadingPhase(){
 void DrawStatusMenu(){
 
 } // appear if you lose/ want to exit
-void DrawPlayGame(){
-    
+void Menu::DrawPlayGame(){
+    BeginDrawing();
+    ClearBackground(GetColor(0x052c46ff));
+    DrawTextureEx(grass, (Vector2){-150, 0}, 0.0f, 1.2f, WHITE);
+    EndDrawing();
 }

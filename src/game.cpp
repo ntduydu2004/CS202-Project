@@ -57,7 +57,8 @@ void Game::run(bool& close){
         // }
         case PLAY_GAME:
         {
-            
+            Menu::DrawPlayGame();
+            break;
         }
         default:
         {

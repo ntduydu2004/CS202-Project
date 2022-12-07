@@ -22,6 +22,7 @@ typedef enum{
 class Menu{
 protected:
     Texture2D background = LoadTexture("../data/image/Background/Background.png");
+    Texture2D grass = LoadTexture("../data/image/Map/Full grass.png");
     Character character[3] =
     {
         Character("Ekko"),
