@@ -4,6 +4,7 @@ using namespace std;
 Menu::~Menu(){
     UnloadTexture(background);
     UnloadTexture(grass);
+    UnloadTexture(smallpath);
 }
 void Menu::DrawMainMenu(){
     if (CheckCollisionPointRec(mousePosition, rec_Mode[0]))
@@ -279,5 +280,6 @@ void Menu::DrawPlayGame(){
     BeginDrawing();
     ClearBackground(GetColor(0x052c46ff));
     DrawTextureEx(grass, (Vector2){-150, 0}, 0.0f, 1.2f, WHITE);
+    DrawTextureEx(smallpath, (Vector2){-150, 0}, 0.0f, 1.2f, WHITE);
     EndDrawing();
 }

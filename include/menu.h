@@ -23,6 +23,7 @@ class Menu{
 protected:
     Texture2D background = LoadTexture("../data/image/Background/Background.png");
     Texture2D grass = LoadTexture("../data/image/Map/Full grass.png");
+    Texture2D smallpath = LoadTexture("../data/image/Map/smallpath.png");
     Character character[3] =
     {
         Character("Ekko"),
