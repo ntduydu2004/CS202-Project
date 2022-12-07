@@ -42,7 +42,7 @@ void Menu::DrawMainMenu(){
         DrawRectangleLines(rec_Mode[indexMouse - 1].x, rec_Mode[indexMouse - 1].y, rec_Mode[indexMouse - 1].width, rec_Mode[indexMouse - 1].height, RAYWHITE);
     }
 
-    DrawText("CROSSING ROAD", GetScreenWidth() / 2 - 200, GetScreenHeight() / 2 - 230, 50, RAYWHITE);
+    DrawText("CROSSING ROAD", GetScreenWidth() / 2 - 200, GetScreenHeight() / 2 - 230, 50, MAROON);
     DrawText(" PLAY ", GetScreenWidth() / 2 - 50, GetScreenHeight() / 2 - 90, 30, RAYWHITE);
     DrawText("LOAD GAME", GetScreenWidth() / 2 - 85, GetScreenHeight() / 2 - 30, 30, RAYWHITE);
     DrawText("SCOREBOARD", GetScreenWidth() / 2 - 100, GetScreenHeight() / 2 + 30, 30, RAYWHITE);
@@ -86,7 +86,7 @@ void Menu::DrawLevelMenu(){
     }
     
 
-    DrawText("CHOOSE YOUR LEVEL", GetScreenWidth() / 2 - MeasureText("CHOOSE YOUR LEVEL", 50)/2, GetScreenHeight() / 2 - 230, 50, RAYWHITE);
+    DrawText("CHOOSE YOUR LEVEL", GetScreenWidth() / 2 - MeasureText("CHOOSE YOUR LEVEL", 50)/2, GetScreenHeight() / 2 - 230, 50, MAROON);
     DrawText(" EASY ", GetScreenWidth() / 2 - 50, GetScreenHeight() / 2 - 90, 30, RAYWHITE);
     DrawText("MEDIUM", GetScreenWidth() / 2 - 60, GetScreenHeight() / 2 - 30, 30, RAYWHITE);
     DrawText(" HARD ", GetScreenWidth() / 2 - 50, GetScreenHeight() / 2 + 30, 30, RAYWHITE);
@@ -116,7 +116,7 @@ void Menu::DrawScoreboard(){
         DrawRectangleLines(rec_ScoreBoard[indexMouse - 1].x, rec_ScoreBoard[indexMouse - 1].y, rec_ScoreBoard[indexMouse - 1].width, rec_ScoreBoard[indexMouse - 1].height, RAYWHITE);
     }
     if (clearScoreBoard){
-        DrawText("THERE IS NO ACHIEVEMENT HERE!!", GetScreenWidth() / 2 - 280, GetScreenHeight() / 2 - 230, 30, RAYWHITE);
+        DrawText("THERE IS NO ACHIEVEMENT HERE!!", GetScreenWidth() / 2 - 280, GetScreenHeight() / 2 - 230, 30, MAROON);
     }
     DrawText(" CLEAR ", GetScreenWidth() / 2 - 60, GetScreenHeight() / 2 + 150, 30, RAYWHITE);
     DrawText(" BACK ", GetScreenWidth() / 2 - 50, GetScreenHeight() / 2 + 210, 30, RAYWHITE);
@@ -139,9 +139,9 @@ void Menu::DrawInstructions(){
         DrawRectangle(rec_Instruction.x, rec_Instruction.y, rec_Instruction.width, rec_Instruction.height, Fade(DARKBROWN, 0.3f));
         DrawRectangleLines(rec_Instruction.x, rec_Instruction.y, rec_Instruction.width, rec_Instruction.height, RAYWHITE);
     }
-    DrawText("USE W, A, S, D TO MOVE ", GetScreenWidth() / 2 - 350, GetScreenHeight() / 2 - 230, 30, RAYWHITE);
-    DrawText("STAY AWAY FROM OBSTACLES !!! ", GetScreenWidth() / 2 - 350, GetScreenHeight() / 2 - 180, 30, RAYWHITE);
-    DrawText("SURVIVE AS LONG AS POSSIBLE ^^ ", GetScreenWidth() / 2 - 350, GetScreenHeight() / 2 - 130, 30, RAYWHITE);
+    DrawTextEx(font,"USE W, A, S, D TO MOVE ", (Vector2){GetScreenWidth() / 2 - 350, GetScreenHeight() / 2 - 230}, 30, 2, DARKPURPLE);
+    DrawText("STAY AWAY FROM OBSTACLES !!! ", GetScreenWidth() / 2 - 350, GetScreenHeight() / 2 - 180, 30, DARKPURPLE);
+    DrawText("SURVIVE AS LONG AS POSSIBLE ^^ ", GetScreenWidth() / 2 - 350, GetScreenHeight() / 2 - 130, 30, DARKPURPLE);
     DrawText(" BACK ", GetScreenWidth() / 2 - 50, GetScreenHeight() / 2 + 90, 30, RAYWHITE);
     EndDrawing();
 }
@@ -216,7 +216,7 @@ void Menu::DrawEnterNamePhase(){
     }
     DrawText("ENTER YOUR NAME", GetScreenWidth() / 2 - 400, GetScreenHeight() / 2 - 60, 30, RAYWHITE);
     DrawText(name, rec_EnterName[0].x + 10, rec_EnterName[0].y + 10, 30, RAYWHITE);
-    if ((frames/15)%2 == 0 && indexTouch == 1) DrawText("|", rec_EnterName[0].x + 13 + MeasureText(name, 30), rec_EnterName[0].y + 10, 30, RAYWHITE);
+    if ((frames/15)%2 == 0 && indexTouch == 1) DrawText("|", rec_EnterName[0].x + 13 + MeasureText(name, 30), rec_EnterName[0].y + 10, 30, MAROON);
     DrawText(" PLAY ", GetScreenWidth() / 2 - 50, GetScreenHeight() / 2 + 150, 30, RAYWHITE);
     DrawText(" BACK ", GetScreenWidth() / 2 - 50, GetScreenHeight() / 2 + 210, 30, RAYWHITE);
     EndDrawing();
