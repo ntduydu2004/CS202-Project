@@ -26,6 +26,7 @@ protected:
     Texture2D doublepath = LoadTexture("../data/image/Map/doublepath.png");
     Texture2D singlepath = LoadTexture("../data/image/Map/singlepath.png");
     Texture2D river = LoadTexture("../data/image/Map/river.png");
+    Texture2D woodboard = LoadTexture("../data/image/Map/woodboard.png");
     Font font=LoadFont("../data/font/AllTheWayToTheSun-o2O0.ttf");
     Character character[3] =
     {

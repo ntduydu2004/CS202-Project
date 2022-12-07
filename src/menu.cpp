@@ -136,14 +136,16 @@ void Menu::DrawInstructions(){
     BeginDrawing();
     ClearBackground(GetColor(0x052c46ff));
     DrawTextureEx(background, (Vector2){-150, 0}, 0.0f, 1.2f, WHITE);
+     DrawTextureEx(woodboard,(Vector2){GetScreenWidth() / 2 - 363, GetScreenHeight() / 2 - 237},0.0f, 0.7f, WHITE);
+    DrawTextureEx(woodboard,(Vector2){GetScreenWidth() / 2 - 363, GetScreenHeight() / 2 - 187},0.0f, 0.7f, WHITE);
     DrawRectangle(rec_Instruction.x, rec_Instruction.y, rec_Instruction.width, rec_Instruction.height, BROWN);
     if (indexMouse){
         DrawRectangle(rec_Instruction.x, rec_Instruction.y, rec_Instruction.width, rec_Instruction.height, Fade(DARKBROWN, 0.3f));
         DrawRectangleLines(rec_Instruction.x, rec_Instruction.y, rec_Instruction.width, rec_Instruction.height, RAYWHITE);
     }
-    DrawTextEx(font,"USE W, A, S, D TO MOVE ", (Vector2){GetScreenWidth() / 2 - 350, GetScreenHeight() / 2 - 230}, 30, 2, DARKPURPLE);
-    DrawText("STAY AWAY FROM OBSTACLES !!! ", GetScreenWidth() / 2 - 350, GetScreenHeight() / 2 - 180, 30, DARKPURPLE);
-    DrawText("SURVIVE AS LONG AS POSSIBLE ^^ ", GetScreenWidth() / 2 - 350, GetScreenHeight() / 2 - 130, 30, DARKPURPLE);
+    DrawTextEx(font,"USE W, A, S, D TO MOVE ", (Vector2){GetScreenWidth() / 2 - 350, GetScreenHeight() / 2 - 230}, 30, 2, YELLOW);
+    DrawTextEx(font,"STAY AWAY FROM OBSTACLES !!! ",(Vector2){GetScreenWidth() / 2 - 350, GetScreenHeight() / 2 - 200}, 30, 2, YELLOW);
+    DrawTextEx(font,"SURVIVE AS LONG AS POSSIBLE ^^ ",(Vector2){GetScreenWidth() / 2 - 350, GetScreenHeight() / 2 - 170}, 30, 2, YELLOW);
     DrawText(" BACK ", GetScreenWidth() / 2 - 50, GetScreenHeight() / 2 + 90, 30, RAYWHITE);
     EndDrawing();
 }
