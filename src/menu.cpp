@@ -44,7 +44,7 @@ void Menu::DrawMainMenu(){
         DrawRectangleLines(rec_Mode[indexMouse - 1].x, rec_Mode[indexMouse - 1].y, rec_Mode[indexMouse - 1].width, rec_Mode[indexMouse - 1].height, RAYWHITE);
     }
 
-    DrawText("CROSSING ROAD", GetScreenWidth() / 2 - 200, GetScreenHeight() / 2 - 230, 50, MAROON);
+    DrawTextEx(font, "CROSSING ROAD", (Vector2){GetScreenWidth() / 2 - 210, GetScreenHeight() / 2 - 230}, 70, 2, DARKBLUE);
     DrawText(" PLAY ", GetScreenWidth() / 2 - 50, GetScreenHeight() / 2 - 90, 30, RAYWHITE);
     DrawText("LOAD GAME", GetScreenWidth() / 2 - 85, GetScreenHeight() / 2 - 30, 30, RAYWHITE);
     DrawText("SCOREBOARD", GetScreenWidth() / 2 - 100, GetScreenHeight() / 2 + 30, 30, RAYWHITE);
@@ -88,7 +88,7 @@ void Menu::DrawLevelMenu(){
     }
     
 
-    DrawText("CHOOSE YOUR LEVEL", GetScreenWidth() / 2 - MeasureText("CHOOSE YOUR LEVEL", 50)/2, GetScreenHeight() / 2 - 230, 50, MAROON);
+    DrawTextEx(font, "CHOOSE YOUR LEVEL", (Vector2){GetScreenWidth() / 2 - 250, GetScreenHeight() / 2 - 230}, 70, 2, MAROON);
     DrawText(" EASY ", GetScreenWidth() / 2 - 50, GetScreenHeight() / 2 - 90, 30, RAYWHITE);
     DrawText("MEDIUM", GetScreenWidth() / 2 - 60, GetScreenHeight() / 2 - 30, 30, RAYWHITE);
     DrawText(" HARD ", GetScreenWidth() / 2 - 50, GetScreenHeight() / 2 + 30, 30, RAYWHITE);
@@ -118,7 +118,8 @@ void Menu::DrawScoreboard(){
         DrawRectangleLines(rec_ScoreBoard[indexMouse - 1].x, rec_ScoreBoard[indexMouse - 1].y, rec_ScoreBoard[indexMouse - 1].width, rec_ScoreBoard[indexMouse - 1].height, RAYWHITE);
     }
     if (clearScoreBoard){
-        DrawText("THERE IS NO ACHIEVEMENT HERE!!", GetScreenWidth() / 2 - 280, GetScreenHeight() / 2 - 230, 30, MAROON);
+        DrawRectangle(GetScreenWidth() / 2 - 325, GetScreenHeight() / 2 - 210, 645, 65,LIME);
+        DrawTextEx(font,"THERE IS NO ACHIEVEMENT HERE!!", (Vector2){GetScreenWidth() / 2 - 320, GetScreenHeight() / 2 - 200}, 50, 2, MAROON);
     }
     DrawText(" CLEAR ", GetScreenWidth() / 2 - 60, GetScreenHeight() / 2 + 150, 30, RAYWHITE);
     DrawText(" BACK ", GetScreenWidth() / 2 - 50, GetScreenHeight() / 2 + 210, 30, RAYWHITE);
@@ -136,7 +137,7 @@ void Menu::DrawInstructions(){
     BeginDrawing();
     ClearBackground(GetColor(0x052c46ff));
     DrawTextureEx(background, (Vector2){-150, 0}, 0.0f, 1.2f, WHITE);
-     DrawTextureEx(woodboard,(Vector2){GetScreenWidth() / 2 - 363, GetScreenHeight() / 2 - 237},0.0f, 0.7f, WHITE);
+    DrawTextureEx(woodboard,(Vector2){GetScreenWidth() / 2 - 363, GetScreenHeight() / 2 - 237},0.0f, 0.7f, WHITE);
     DrawTextureEx(woodboard,(Vector2){GetScreenWidth() / 2 - 363, GetScreenHeight() / 2 - 187},0.0f, 0.7f, WHITE);
     DrawRectangle(rec_Instruction.x, rec_Instruction.y, rec_Instruction.width, rec_Instruction.height, BROWN);
     if (indexMouse){
@@ -218,7 +219,7 @@ void Menu::DrawEnterNamePhase(){
         DrawRectangle(rec_EnterName[indexMouse - 1].x, rec_EnterName[indexMouse - 1].y, rec_EnterName[indexMouse - 1].width, rec_EnterName[indexMouse - 1].height, Fade(DARKBROWN, 0.3f));
         DrawRectangleLines(rec_EnterName[indexMouse - 1].x, rec_EnterName[indexMouse - 1].y, rec_EnterName[indexMouse - 1].width, rec_EnterName[indexMouse - 1].height, RAYWHITE);
     }
-    DrawText("ENTER YOUR NAME", GetScreenWidth() / 2 - 400, GetScreenHeight() / 2 - 60, 30, RAYWHITE);
+    DrawTextEx(font, "ENTER YOUR NAME", (Vector2){GetScreenWidth() / 2 - 400, GetScreenHeight() / 2 - 60}, 40, 2, MAROON);
     DrawText(name, rec_EnterName[0].x + 10, rec_EnterName[0].y + 10, 30, RAYWHITE);
     if ((frames/15)%2 == 0 && indexTouch == 1) DrawText("|", rec_EnterName[0].x + 13 + MeasureText(name, 30), rec_EnterName[0].y + 10, 30, MAROON);
     DrawText(" PLAY ", GetScreenWidth() / 2 - 50, GetScreenHeight() / 2 + 150, 30, RAYWHITE);
@@ -256,17 +257,21 @@ void Menu::DrawChooseCharacter(){
     DrawRectangle(rec_ChooseCharacter[2].x, rec_ChooseCharacter[2].y, rec_ChooseCharacter[2].width, rec_ChooseCharacter[2].height, BROWN);
     DrawRectangle(rec_ChooseCharacter[3].x, rec_ChooseCharacter[3].y, rec_ChooseCharacter[3].width, rec_ChooseCharacter[3].height, BROWN);
     DrawRectangle(rec_ChooseCharacter[4].x, rec_ChooseCharacter[4].y, rec_ChooseCharacter[4].width, rec_ChooseCharacter[4].height, BROWN);
-    if (1 <= indexMouse && indexMouse <= 3){
+
+    if (indexMouse){
+        DrawRectangle(rec_ChooseCharacter[indexMouse - 1].x, rec_ChooseCharacter[indexMouse - 1].y, rec_ChooseCharacter[indexMouse - 1].width, rec_ChooseCharacter[indexMouse - 1].height, Fade(LIME, 0.5f));
+       // DrawRectangleLines(rec_ChooseCharacter[indexTouch - 1].x, rec_ChooseCharacter[indexTouch - 1].y, rec_ChooseCharacter[indexTouch - 1].width, rec_ChooseCharacter[indexTouch - 1].height, RAYWHITE);
+    }
+
+    if (1 <= indexMouse && indexMouse <= 4){
         DrawRectangleLines(rec_ChooseCharacter[indexMouse - 1].x, rec_ChooseCharacter[indexMouse - 1].y, rec_ChooseCharacter[indexMouse - 1].width, rec_ChooseCharacter[indexMouse - 1].height, RAYWHITE);
     }
-    else if (indexMouse >= 4) {
-        DrawRectangle(rec_ChooseCharacter[indexMouse - 1].x, rec_ChooseCharacter[indexMouse - 1].y, rec_ChooseCharacter[indexMouse - 1].width, rec_ChooseCharacter[indexMouse - 1].height, Fade(DARKBROWN, 0.3f));
-        DrawRectangleLines(rec_ChooseCharacter[indexMouse - 1].x, rec_ChooseCharacter[indexMouse - 1].y, rec_ChooseCharacter[indexMouse - 1].width, rec_ChooseCharacter[indexMouse - 1].height, RAYWHITE);
-    }
+
     if (indexTouch){
         DrawRectangleLines(rec_ChooseCharacter[indexTouch - 1].x, rec_ChooseCharacter[indexTouch - 1].y, rec_ChooseCharacter[indexTouch - 1].width, rec_ChooseCharacter[indexTouch - 1].height, RAYWHITE);
     }
-    DrawText("CHOOSE YOUR CHARACTER", GetScreenWidth() / 2 - MeasureText("CHOOSE YOUR CHARACTER", 50) / 2, GetScreenHeight() / 2 - 230, 50, DARKGREEN);
+
+    DrawTextEx(font, "CHOOSE YOUR CHARACTER", (Vector2){GetScreenWidth() / 2 - 700 / 2, GetScreenHeight() / 2 - 230}, 70, 2, DARKGREEN);
     DrawText(" PLAY ", GetScreenWidth() / 2 - 50, GetScreenHeight() / 2 + 150, 30, RAYWHITE);
     DrawText(" BACK ", GetScreenWidth() / 2 - 50, GetScreenHeight() / 2 + 210, 30, RAYWHITE);
     character[0].DrawChoose((Vector2){GetScreenWidth() / 2 - 365, GetScreenHeight() / 2 - 125});
