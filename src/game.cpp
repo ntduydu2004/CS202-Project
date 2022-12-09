@@ -57,7 +57,7 @@ void Game::run(bool& close){
         // }
         case PLAY_GAME:
         {
-            Menu::DrawPlayGame();
+            DrawPlayGame();
             break;
         }
         default:
@@ -67,4 +67,8 @@ void Game::run(bool& close){
         }
     }
     DrawFPS(10, 10);
+}
+
+void Game::DrawPlayGame() {
+    gameMap.drawMap();
 }

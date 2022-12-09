@@ -64,6 +64,8 @@
         "tuple": "cpp",
         "typeindex": "cpp",
         "utility": "cpp",
-        "valarray": "cpp"
+        "valarray": "cpp",
+        "regex": "cpp",
+        "*.m": "cpp"
     }
 }

@@ -1,7 +1,6 @@
 #pragma once
 #include <bits/stdc++.h>
 #include "raylib.h"
-#include "processing.h"
 using namespace std;
 class Character{
 private:

@@ -1,7 +1,6 @@
 #pragma once
 #include <iostream>
 #include <vector>
-#include <map>
 #include "raylib.h"
 #include "raygui.h"
 #include "character.h"
@@ -19,28 +18,23 @@ typedef enum{
     STATUS_MENU = 8,
     PLAY_GAME = 9,
 }menuScreen;
-class Menu{
+class Menu {
 protected:
-    Texture2D background = LoadTexture("../data/image/Background/Background.png");
-    Texture2D grass = LoadTexture("../data/image/Map/Full grass.png");
-    Texture2D doublepath = LoadTexture("../data/image/Map/doublepath.png");
-    Texture2D singlepath = LoadTexture("../data/image/Map/singlepath.png");
-    Texture2D river = LoadTexture("../data/image/Map/river.png");
-    Texture2D woodboard = LoadTexture("../data/image/Map/woodboard.png");
     Font font=LoadFont("../data/font/AllTheWayToTheSun-o2O0.ttf");
-    Character character[3] =
-    {
-        Character("Ekko"),
-        Character("Wukong"),
-        Character("Samira"),
-    };
+    Texture2D background = LoadTexture("../data/image/Background/Background.png");
+    Texture2D woodboard = LoadTexture("../data/image/Map/woodboard.png");
+    Character character[3] = { Character("Ekko"), Character("Wukong"), Character("Samira")};
+
     short menu = 0, id = 0, characterIndex = 0; 
     short frames = 0;
     bool close = false, clearScoreBoard = true, touch = false;
+
     Vector2 mousePosition;
     Vector2 touchPosition;
+
     char name[30] = "\0";
     short indexMouse = -1, indexTouch = -1, choose, level = 0;
+
     Rectangle rec_Mode[5] =
     {
         {GetScreenWidth() / 2 - 150, GetScreenHeight() / 2 - 100, 300, 50},
@@ -87,5 +81,4 @@ public:
     void DrawEnterNamePhase();
     void DrawInstructions();
     void DrawChooseCharacter();
-    void DrawPlayGame();
 };
