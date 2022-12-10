@@ -3,9 +3,7 @@
 #include <vector>
 #include "raylib.h"
 #include "raygui.h"
-#include "character.h"
-#include "map.h"
-#include "obstacle.h"
+#include "player.h"
 typedef enum{
     MAIN_MENU = 0,
     LEVEL_MENU = 1,
@@ -32,7 +30,7 @@ protected:
     Vector2 mousePosition;
     Vector2 touchPosition;
 
-    char name[30] = "\0";
+    char characterName[30] = "\0";
     short indexMouse = -1, indexTouch = -1, choose, level = 0;
 
     Rectangle rec_Mode[5] =

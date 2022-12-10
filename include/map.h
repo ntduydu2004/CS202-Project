@@ -15,5 +15,5 @@ private:
 
 public:
     ~Map();
-    void drawMap();
+    void draw();
 };

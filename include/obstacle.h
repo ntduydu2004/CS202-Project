@@ -1,20 +1,21 @@
 #pragma once
 #include <bits/stdc++.h>
 #include "raylib.h"
-#include "Character.h"
+#include "player.h"
 using namespace std;
 
 
 class Obstacle {
 private:
     Texture2D image;
-    int x, y;
+    Vector2 position;
     int speed;
 
 public:
-    Obstacle(int _x, int _y, int _speed, string texturePath);
+    Obstacle(Vector2 _position, int _speed, string texturePath);
     ~Obstacle();
-    void soundOnImpact();
+    void draw();
+    virtual void soundOnImpact() = 0;
 
 };
 

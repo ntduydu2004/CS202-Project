@@ -8,7 +8,7 @@ Map::~Map() {
     UnloadTexture(river);
 }
 
-void Map::drawMap() {
+void Map::draw() {
     BeginDrawing();
     ClearBackground(GetColor(0x052c46ff));
     DrawTextureEx(grass, (Vector2){-150, 0}, 0.0f, 1.0f, WHITE);

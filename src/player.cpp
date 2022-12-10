@@ -1,9 +1,10 @@
-#include "character.h"
+#include "player.h"
 using namespace std;
+
 Character::Character(string name){
     moveside = 0;
     movestate = 0;
-    this->name = name;
+    this->characterName = name;
     string Filename = "../data/image/Character/" + name;
     moveState.assign(4, vector <Texture2D> (4));
     // add stand state
@@ -34,11 +35,22 @@ Character::~Character(){
 }
 void Character::DrawChoose(Vector2 position){
     DrawTextureEx(moveState[2][0], position, 0.0f, 2.0f, WHITE);
-    DrawText(name.c_str(), position.x + 20, position.y + 150, 30, YELLOW);
+    DrawText(characterName.c_str(), position.x + 20, position.y + 150, 30, YELLOW);
 }
 void Character::DrawInGame(Vector2 position){
     DrawTextureEx(moveState[moveside][movestate], position, 0.0f, 1.0f, WHITE);
 }
-void Character::SetNamePlayer(string namePlayer){
-    this->namePlayer = namePlayer;
+
+
+
+void Player::SetCharacter(Character _character) {
+    character = _character;
+}
+
+void Player::SetNamePlayer(string playerName){
+    this->playerName = playerName;
+}
+
+void Player::draw() {
+    character.DrawInGame(position);
 }

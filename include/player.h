@@ -7,12 +7,22 @@ private:
     short moveside; // 0: up, 1: right, 2: down, 3: left
     short movestate;
     vector <vector <Texture2D>> moveState;
-    string name;
-    string namePlayer;
+    string characterName;
 public:
+    Character() = default;
     Character(string name);
     ~Character();
     void DrawInGame(Vector2 position);
     void DrawChoose(Vector2 position);
-    void SetNamePlayer(string namePlayer);
+};
+
+class Player {
+private:
+    Vector2 position;
+    string playerName;
+    Character character;
+public:
+    void SetCharacter(Character _character);
+    void SetNamePlayer(string playerName);
+    void draw();
 };

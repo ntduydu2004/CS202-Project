@@ -1,9 +1,8 @@
 #include "Obstacle.h"
 
 
-Obstacle::Obstacle(int _x, int _y, int _speed, string texturePath) {
-    x = _x;
-    y = _y;
+Obstacle::Obstacle(Vector2 _position, int _speed, string texturePath) {
+    position = _position;
     speed = _speed;
 
     if (speed > 0) image = LoadTexture((texturePath + "/right.png").c_str());
@@ -12,4 +11,8 @@ Obstacle::Obstacle(int _x, int _y, int _speed, string texturePath) {
 
 Obstacle::~Obstacle() {
     UnloadTexture(image);
+}
+
+void Obstacle::draw() {
+    DrawTextureEx(image, position, .0f, 1.0f, WHITE);
 }

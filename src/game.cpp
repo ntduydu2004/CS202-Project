@@ -70,5 +70,6 @@ void Game::run(bool& close){
 }
 
 void Game::DrawPlayGame() {
-    gameMap.drawMap();
+    gameMap.draw();
+    player.draw();
 }

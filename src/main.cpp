@@ -22,7 +22,7 @@ int main(void)
         game.run(close);
         // Draw
         //----------------------------------------------------------------------------------
-        // DrawEnterNamePhase(mousePosition, touchPosition, indexMouse, indexTouch, menu, rec_EnterName, background, name, id);
+        // DrawEnterNamePhase(mousePosition, touchPosition, indexMouse, indexTouch, menu, rec_EnterName, background, characterName, id);
         if (close) break;
         //----------------------------------------------------------------------------------
     }
