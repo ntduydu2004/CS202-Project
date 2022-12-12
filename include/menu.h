@@ -30,43 +30,43 @@ protected:
     Vector2 mousePosition;
     Vector2 touchPosition;
 
-    char characterName[30] = "\0";
+    char playerName[30] = "\0";
     short indexMouse = -1, indexTouch = -1, choose, level = 0;
 
     Rectangle rec_Mode[5] =
     {
-        {GetScreenWidth() / 2 - 150, GetScreenHeight() / 2 - 100, 300, 50},
-        {GetScreenWidth() / 2 - 150, GetScreenHeight() / 2 - 40, 300, 50},
-        {GetScreenWidth() / 2 - 150, GetScreenHeight() / 2 + 20, 300, 50},
-        {GetScreenWidth() / 2 - 150, GetScreenHeight() / 2 + 80, 300, 50},
-        {GetScreenWidth() / 2 - 150, GetScreenHeight() / 2 + 140, 300, 50},
+        {GetScreenWidth() / 2.0f - 150, GetScreenHeight() / 2.0f - 100, 300, 50},
+        {GetScreenWidth() / 2.0f - 150, GetScreenHeight() / 2.0f - 40, 300, 50},
+        {GetScreenWidth() / 2.0f - 150, GetScreenHeight() / 2.0f + 20, 300, 50},
+        {GetScreenWidth() / 2.0f - 150, GetScreenHeight() / 2.0f + 80, 300, 50},
+        {GetScreenWidth() / 2.0f - 150, GetScreenHeight() / 2.0f + 140, 300, 50},
     };
     Rectangle rec_Level[4] =
     {
-        {GetScreenWidth() / 2 - 150, GetScreenHeight() / 2 - 100, 300, 50},
-        {GetScreenWidth() / 2 - 150, GetScreenHeight() / 2 - 40, 300, 50},
-        {GetScreenWidth() / 2 - 150, GetScreenHeight() / 2 + 20, 300, 50},
-        {GetScreenWidth() / 2 - 150, GetScreenHeight() / 2 + 80, 300, 50},
+        {GetScreenWidth() / 2.0f - 150, GetScreenHeight() / 2.0f - 100, 300, 50},
+        {GetScreenWidth() / 2.0f - 150, GetScreenHeight() / 2.0f - 40, 300, 50},
+        {GetScreenWidth() / 2.0f - 150, GetScreenHeight() / 2.0f + 20, 300, 50},
+        {GetScreenWidth() / 2.0f - 150, GetScreenHeight() / 2.0f + 80, 300, 50},
     };
     Rectangle rec_ScoreBoard[2] =
     {
-        {GetScreenWidth() / 2 - 150, GetScreenHeight() / 2 + 140, 300, 50},
-        {GetScreenWidth() / 2 - 150, GetScreenHeight() / 2 + 200, 300, 50},
+        {GetScreenWidth() / 2.0f - 150, GetScreenHeight() / 2.0f + 140, 300, 50},
+        {GetScreenWidth() / 2.0f - 150, GetScreenHeight() / 2.0f + 200, 300, 50},
     };
-    Rectangle rec_Instruction = {GetScreenWidth() / 2 - 150, GetScreenHeight() / 2 + 80, 300, 50};
+    Rectangle rec_Instruction = {GetScreenWidth() / 2.0f - 150, GetScreenHeight() / 2.0f + 80, 300, 50};
     Rectangle rec_EnterName[3] =
     {
-        {GetScreenWidth() / 2 - 400, GetScreenHeight() / 2 - 25, 800, 50},
-        {GetScreenWidth() / 2 - 150, GetScreenHeight() / 2 + 140, 300, 50},
-        {GetScreenWidth() / 2 - 150, GetScreenHeight() / 2 + 200, 300, 50},
+        {GetScreenWidth() / 2.0f - 400, GetScreenHeight() / 2.0f - 25, 800, 50},
+        {GetScreenWidth() / 2.0f - 150, GetScreenHeight() / 2.0f + 140, 300, 50},
+        {GetScreenWidth() / 2.0f - 150, GetScreenHeight() / 2.0f + 200, 300, 50},
     };
     Rectangle rec_ChooseCharacter[5] =
     {
-        {GetScreenWidth() / 2 - 125, GetScreenHeight() / 2 - 150, 250, 250},
-        {GetScreenWidth() / 2 - 425, GetScreenHeight() / 2 - 150, 250, 250},
-        {GetScreenWidth() / 2 + 175, GetScreenHeight() / 2 - 150, 250, 250},
-        {GetScreenWidth() / 2 - 150, GetScreenHeight() / 2 + 140, 300, 50},
-        {GetScreenWidth() / 2 - 150, GetScreenHeight() / 2 + 200, 300, 50},
+        {GetScreenWidth() / 2.0f - 425, GetScreenHeight() / 2.0f - 150, 250, 250},
+        {GetScreenWidth() / 2.0f - 125, GetScreenHeight() / 2.0f - 150, 250, 250},
+        {GetScreenWidth() / 2.0f + 175, GetScreenHeight() / 2.0f - 150, 250, 250},
+        {GetScreenWidth() / 2.0f - 150, GetScreenHeight() / 2.0f + 140, 300, 50},
+        {GetScreenWidth() / 2.0f - 150, GetScreenHeight() / 2.0f + 200, 300, 50},
     };
     
 public:
@@ -78,5 +78,5 @@ public:
     void DrawScoreboard();
     void DrawEnterNamePhase();
     void DrawInstructions();
-    void DrawChooseCharacter();
+    void DrawChooseCharacter(Character *&pChosenCharacter);
 };
