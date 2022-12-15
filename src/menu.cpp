@@ -267,6 +267,7 @@ void Menu::DrawChooseCharacter(Character *&pChosenCharacter){
     }
 
     if (indexTouch){
+        DrawRectangle(rec_ChooseCharacter[indexTouch - 1].x, rec_ChooseCharacter[indexTouch - 1].y, rec_ChooseCharacter[indexTouch - 1].width, rec_ChooseCharacter[indexTouch - 1].height, Fade(LIME, 0.5f));
         DrawRectangleLines(rec_ChooseCharacter[indexTouch - 1].x, rec_ChooseCharacter[indexTouch - 1].y, rec_ChooseCharacter[indexTouch - 1].width, rec_ChooseCharacter[indexTouch - 1].height, RAYWHITE);
     }
 
@@ -278,9 +279,20 @@ void Menu::DrawChooseCharacter(Character *&pChosenCharacter){
     character[2].DrawChoose((Vector2){GetScreenWidth() / 2.0f + 235, GetScreenHeight() / 2.0f - 125});
     EndDrawing();
 }
+
+void Menu::Restart(){
+    GameMap.Restart();
+    LoadingSecond = 239;
+    character[characterIndex].position = (Vector2){GetScreenWidth()/2 - 32, GetScreenHeight() - 200};
+    character[characterIndex].moveside = character[characterIndex].movestate = 0;
+    isCollided = false;
+
+}
+
 void DrawLoadingPhase(){
     
 }
 void DrawStatusMenu(){
 
 } // appear if you lose/ want to exit
+

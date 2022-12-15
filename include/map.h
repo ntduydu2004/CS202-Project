@@ -16,4 +16,5 @@ private:
 public:
     ~Map();
     void draw();
+    void Restart();
 };

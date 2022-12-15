@@ -79,4 +79,5 @@ public:
     void DrawEnterNamePhase();
     void DrawInstructions();
     void DrawChooseCharacter(Character *&pChosenCharacter);
+    void Restart();
 };
