@@ -81,6 +81,10 @@ public:
     short GetHeight(ObjectFactory& objectFactory);
     short GetWidth(ObjectFactory& objectFactory);
     void Draw(ObjectFactory& objectFactory, int TrafficLight);
+    void Move(float p = 0.5f);
+    void MoveX(int TrafficLight,  float speed);
+    void Follow(Vector2& position, float speed);
+    void CheckCollisionObject(ObjectFactory& objectfactory, Vector2& position, bool& isCollided);
     void Load(ifstream& fin);
     void Save(ofstream& fout);
 };
