@@ -146,7 +146,77 @@ void Menu::DrawInstructions(){
     DrawText(" BACK ", GetScreenWidth() / 2.0f - 50, GetScreenHeight() / 2.0f + 90, 30, RAYWHITE);
     EndDrawing();
 }
+void Menu::DrawEnterNamePhase(){
+    if (CheckCollisionPointRec(mousePosition, rec_EnterName[0])) {
+        indexMouse = 1;
+        SetMouseCursor(2);
+    }
+    else if (CheckCollisionPointRec(mousePosition, rec_EnterName[1])) {
+        indexMouse = 2;
+        SetMouseCursor(4);
+    }
+    else if (CheckCollisionPointRec(mousePosition, rec_EnterName[2])) {
+        indexMouse = 3;
+        SetMouseCursor(4);
+    }
+    else 
+        indexMouse = 0;
 
+
+    if (IsKeyPressed(KEY_ESCAPE)) menu = LEVEL_MENU;
+    if (IsMouseButtonPressed(0)) {
+        if (CheckCollisionPointRec(mousePosition, rec_EnterName[0])) {
+            frames = 0;
+            indexTouch = 1;
+        }
+        else if (CheckCollisionPointRec(mousePosition, rec_EnterName[1])) {
+            indexTouch = 0;
+            menu = 7; // enter to choose character
+        }
+        else if (CheckCollisionPointRec(mousePosition, rec_EnterName[2]))
+            menu = 1;
+        else {
+            indexTouch = 0;
+            frames = 100;
+        }
+    }
+    if (indexTouch == 1) {
+        int key = GetCharPressed();
+        while (key > 0) {
+            if ((key >= 32) && (key <= 125) && (id <= 25)) {
+                name[id] = (char)key;
+                name[id + 1] = '\0';
+                id++;
+            }
+            key = GetCharPressed();
+        }
+        if (IsKeyPressed(KEY_BACKSPACE)) {
+            id--;
+            if (id < 0) id = 0;
+            name[id] = '\0';
+        }
+    }
+    if (IsKeyPressed(KEY_ENTER)) {
+        indexTouch = 0;
+        menu = 7;
+    }
+    BeginDrawing();
+    ClearBackground(GetColor(0x052c46ff));
+    DrawTextureEx(background, (Vector2){-150, 0}, 0.0f, 1.2f, WHITE);
+    DrawRectangle(rec_EnterName[0].x, rec_EnterName[0].y, rec_EnterName[0].width, rec_EnterName[0].height, DARKBLUE);
+    DrawRectangle(rec_EnterName[1].x, rec_EnterName[1].y, rec_EnterName[1].width, rec_EnterName[1].height, BLUE);
+    DrawRectangle(rec_EnterName[2].x, rec_EnterName[2].y, rec_EnterName[2].width, rec_EnterName[2].height, BLUE);
+    if (indexMouse) {
+        DrawRectangle(rec_EnterName[indexMouse - 1].x, rec_EnterName[indexMouse - 1].y, rec_EnterName[indexMouse - 1].width, rec_EnterName[indexMouse - 1].height, Fade(DARKBLUE, 0.3f));
+        DrawRectangleLines(rec_EnterName[indexMouse - 1].x, rec_EnterName[indexMouse - 1].y, rec_EnterName[indexMouse - 1].width, rec_EnterName[indexMouse - 1].height, DARKBLUE);
+    }
+    DrawText("ENTER YOUR NAME", GetScreenWidth() / 2 - 400, GetScreenHeight() / 2 - 60, 30, MAROON);
+    DrawText(name, rec_EnterName[0].x + 10, rec_EnterName[0].y + 10, 30, RAYWHITE);
+    if ((frames/15)%2 == 0 && indexTouch == 1) DrawText("|", rec_EnterName[0].x + 13 + MeasureText(name, 30), rec_EnterName[0].y + 10, 30, RAYWHITE);
+    DrawText(" PLAY ", GetScreenWidth() / 2 - 50, GetScreenHeight() / 2 + 150, 30, RAYWHITE);
+    DrawText(" BACK ", GetScreenWidth() / 2 - 50, GetScreenHeight() / 2 + 210, 30, RAYWHITE);
+    EndDrawing();
+}
 void Menu::DrawChooseCharacter(Character *&pChosenCharacter){
     indexMouse = 0;
     for (int i = 0; i <= 4; ++i)
