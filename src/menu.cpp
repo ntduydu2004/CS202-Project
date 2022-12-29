@@ -284,6 +284,90 @@ void Menu::Restart(){
 
 }
 
+void Menu::DrawLoadGame(){
+    if (CheckCollisionPointRec(mousePosition, rec_LoadGame[0])){
+        indexMouse = 1;
+        SetMouseCursor(2);
+    }
+    else if (CheckCollisionPointRec(mousePosition, rec_LoadGame[1])){
+        indexMouse = 2;
+        SetMouseCursor(4);
+    }
+    else if (CheckCollisionPointRec(mousePosition, rec_LoadGame[2])){
+        indexMouse = 3;
+        SetMouseCursor(4);
+    }
+    else{
+        indexMouse = 0;
+    }
+    if (IsKeyPressed(KEY_ESCAPE)) menu = LEVEL_MENU;
+    if (IsMouseButtonPressed(0))
+    {
+        if (CheckCollisionPointRec(mousePosition, rec_LoadGame[0])){
+            frames = 0;
+            indexTouch = 1;
+        }
+        else if (CheckCollisionPointRec(mousePosition, rec_LoadGame[1])){
+            CanLoad = DirectoryExists(FilePath.c_str()) && !IsPathFile(FilePath.c_str());
+            if (CanLoad){
+                LoadGame();
+                LoadingSecond = 239;
+                menu = LOADING_PHASE;
+            }
+        }
+        else if (CheckCollisionPointRec(mousePosition, rec_LoadGame[2])){
+            menu = MAIN_MENU;
+        }
+        else{
+            indexTouch = 0;
+            frames = 100;
+        }
+    }
+    if (indexTouch == 1){
+        int key = GetCharPressed();
+        while (key > 0)
+        {
+            if ((key >= 32) && (key <= 125) && (id <= 25))
+            {
+                FilePath.push_back((char)key);
+            }
+            key = GetCharPressed();
+        }
+        if (IsKeyPressed(KEY_BACKSPACE))
+        {
+            if (FilePath.size())
+            FilePath.pop_back();
+        }
+    }
+    if (IsKeyPressed(KEY_ENTER)){
+        CanLoad = DirectoryExists(FilePath.c_str()) && !IsPathFile(FilePath.c_str());
+        if (CanLoad){
+            LoadGame();
+            LoadingSecond = 239;
+            menu = LOADING_PHASE;
+        }
+    }
+    BeginDrawing();
+    ClearBackground(GetColor(0x052c46ff));
+    DrawTextureEx(background, (Vector2){-150, 0}, 0.0f, 1.2f, WHITE);
+    DrawRectangle(rec_LoadGame[0].x, rec_LoadGame[0].y, rec_LoadGame[0].width, rec_LoadGame[0].height, DARKBLUE);
+    DrawRectangle(rec_LoadGame[1].x, rec_LoadGame[1].y, rec_LoadGame[1].width, rec_LoadGame[1].height, BLUE);
+    DrawRectangle(rec_LoadGame[2].x, rec_LoadGame[2].y, rec_LoadGame[2].width, rec_LoadGame[2].height, BLUE);
+    if (indexMouse) {
+        DrawRectangle(rec_LoadGame[indexMouse - 1].x, rec_LoadGame[indexMouse - 1].y, rec_LoadGame[indexMouse - 1].width, rec_LoadGame[indexMouse - 1].height, Fade(DARKBLUE, 0.3f));
+        DrawRectangleLines(rec_LoadGame[indexMouse - 1].x, rec_LoadGame[indexMouse - 1].y, rec_LoadGame[indexMouse - 1].width, rec_LoadGame[indexMouse - 1].height, DARKBLUE);
+    }
+    DrawText("CHOOSE A FOLDER PATH TO LOAD", GetScreenWidth() / 2 - 400, GetScreenHeight() / 2 - 60, 30, MAROON);
+    DrawText(FilePath.c_str(), rec_LoadGame[0].x + 10, rec_LoadGame[0].y + 10, 30, RAYWHITE);
+    if ((frames/15)%2 == 0 && indexTouch == 1) DrawText("|", rec_LoadGame[0].x + 13 + MeasureText(FilePath.c_str(), 30), rec_LoadGame[0].y + 10, 30, RAYWHITE);
+    DrawText(" LOAD ", GetScreenWidth() / 2 - 50, GetScreenHeight() / 2 + 150, 30, RAYWHITE);
+    DrawText(" BACK ", GetScreenWidth() / 2 - 50, GetScreenHeight() / 2 + 210, 30, RAYWHITE);
+    if (!CanLoad){
+        DrawText("*WRONG DIRECTORY", GetScreenWidth() / 2 - 400, GetScreenHeight() / 2 + 50, 20, RED);
+    }
+    EndDrawing();
+}
+
 void DrawLoadingPhase(){
     
 }
