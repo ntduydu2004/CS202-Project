@@ -15,6 +15,7 @@ typedef enum{
     CHOOSE_CHARACTER = 7,
     STATUS_MENU = 8,
     PLAY_GAME = 9,
+    LOADING_PHASE = 10,
 }menuScreen;
 class Menu {
 protected:
@@ -25,13 +26,15 @@ protected:
 
     short menu = 0, id = 0, characterIndex = 0; 
     short frames = 0;
-    bool close = false, clearScoreBoard = true, touch = false;
+    bool close = false, clearScoreBoard = true;
+    bool touch = false, CanLoad = true, CanSave = true;
 
     Vector2 mousePosition;
     Vector2 touchPosition;
 
     char playerName[30] = "\0";
     short indexMouse = -1, indexTouch = -1, choose, level = 0;
+    short LoadingSecond = 239;
 
     Rectangle rec_Mode[5] =
     {
@@ -68,11 +71,18 @@ protected:
         {GetScreenWidth() / 2.0f - 150, GetScreenHeight() / 2.0f + 140, 300, 50},
         {GetScreenWidth() / 2.0f - 150, GetScreenHeight() / 2.0f + 200, 300, 50},
     };
+      Rectangle rec_LoadGame[3] = 
+    {
+        {GetScreenWidth() / 2 - 400, GetScreenHeight() / 2 - 25, 800, 50},
+        {GetScreenWidth() / 2 - 150, GetScreenHeight() / 2 + 140, 300, 50},
+        {GetScreenWidth() / 2 - 150, GetScreenHeight() / 2 + 200, 300, 50},
+    };
     
 public:
     ~Menu();
     void DrawMainMenu();
     void DrawLevelMenu();
+    void DrawLoadGame();
     void DrawLoadGameWhilePlay(); // appear if you press T
     void DrawSaveGameWhilePlay(); // appear if you press L
     void DrawScoreboard();
