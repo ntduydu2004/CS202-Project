@@ -90,4 +90,5 @@ public:
     void DrawInstructions();
     void DrawChooseCharacter(Character *&pChosenCharacter);
     void Restart();
+    void SaveGame();
 };
