@@ -281,6 +281,9 @@ void Menu::Restart(){
     character[characterIndex].position = (Vector2){GetScreenWidth()/2 - 32, GetScreenHeight() - 200};
     character[characterIndex].moveside = character[characterIndex].movestate = 0;
     isCollided = false;
+    if (record < score) record = score;
+    score = 0;
+    acceleration = (level - 1)*2;
 
 }
 

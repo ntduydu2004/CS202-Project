@@ -30,18 +30,22 @@ protected:
 
     short menu = 0, id = 0, characterIndex = 0; 
     short frames = 0;
+    float acceleration = 0;
     bool close = false, clearScoreBoard = true;
     bool touch = false, CanLoad = true, CanSave = true;
 
     Vector2 mousePosition;
     Vector2 touchPosition;
-
-    char playerName[30] = "\0";
+    char name[30] = "\0";
     string FilePath;
     short indexMouse = -1, indexTouch = -1, choose, level = 0;
+    int score = 0;
     short TrafficLightSecond = 0;
     short TrafficLight = 0;
     short LoadingSecond = 239;
+    bool isCollided = false;
+    int record = 0;
+
 
     Rectangle rec_Mode[5] =
     {
