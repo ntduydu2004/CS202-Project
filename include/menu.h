@@ -16,6 +16,10 @@ typedef enum{
     STATUS_MENU = 8,
     PLAY_GAME = 9,
     LOADING_PHASE = 10,
+    LOSE_MENU = 11,
+    LOAD_GAME_PLAY = 12,
+    SAVE_GAME = 13,
+
 }menuScreen;
 class Menu {
 protected:
@@ -33,7 +37,10 @@ protected:
     Vector2 touchPosition;
 
     char playerName[30] = "\0";
+    string FilePath;
     short indexMouse = -1, indexTouch = -1, choose, level = 0;
+    short TrafficLightSecond = 0;
+    short TrafficLight = 0;
     short LoadingSecond = 239;
 
     Rectangle rec_Mode[5] =
@@ -77,6 +84,13 @@ protected:
         {GetScreenWidth() / 2 - 150, GetScreenHeight() / 2 + 140, 300, 50},
         {GetScreenWidth() / 2 - 150, GetScreenHeight() / 2 + 200, 300, 50},
     };
+      Rectangle rec_LoadGameWhilePlay[4] =
+    {
+        {GetScreenWidth() / 2 - 400, GetScreenHeight() / 2 - 25, 800, 50},
+        {GetScreenWidth() / 2 - 150, GetScreenHeight() / 2 + 140, 300, 50},
+        {GetScreenWidth() / 2 - 150, GetScreenHeight() / 2 + 200, 300, 50},
+        {GetScreenWidth() / 2 - 150, GetScreenHeight() / 2 + 260, 300, 50},
+    };
     
 public:
     ~Menu();
@@ -91,4 +105,5 @@ public:
     void DrawChooseCharacter(Character *&pChosenCharacter);
     void Restart();
     void SaveGame();
+
 };

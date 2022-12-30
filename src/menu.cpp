@@ -367,6 +367,104 @@ void Menu::DrawLoadGame(){
     }
     EndDrawing();
 }
+
+void Menu::DrawLoadGameWhilePlay(){
+    if (CheckCollisionPointRec(mousePosition, rec_LoadGameWhilePlay[0])){
+        indexMouse = 1;
+        SetMouseCursor(2);
+    }
+    else if (CheckCollisionPointRec(mousePosition, rec_LoadGameWhilePlay[1])){
+        indexMouse = 2;
+        SetMouseCursor(4);
+    }
+    else if (CheckCollisionPointRec(mousePosition, rec_LoadGameWhilePlay[2])){
+        indexMouse = 3;
+        SetMouseCursor(4);
+    }
+    else if (CheckCollisionPointRec(mousePosition, rec_LoadGameWhilePlay[3])){
+        indexMouse = 4;
+        SetMouseCursor(4);
+    }
+    else{
+        indexMouse = 0;
+    }
+    if (IsKeyPressed(KEY_ESCAPE)) menu = LEVEL_MENU;
+    if (IsMouseButtonPressed(0))
+    {
+        if (CheckCollisionPointRec(mousePosition, rec_LoadGameWhilePlay[0])){
+            frames = 0;
+            indexTouch = 1;
+        }
+        else if (CheckCollisionPointRec(mousePosition, rec_LoadGameWhilePlay[1])){
+            indexTouch = 0;
+            menu = PLAY_GAME; // enter to choose character
+        }
+        else if (CheckCollisionPointRec(mousePosition, rec_LoadGameWhilePlay[2])){
+            CanLoad = DirectoryExists(FilePath.c_str()) && !IsPathFile(FilePath.c_str());
+            if (CanLoad){
+                LoadGame();
+                LoadingSecond = 239;
+                menu = LOADING_PHASE;
+            }
+        }
+        else if (CheckCollisionPointRec(mousePosition, rec_LoadGameWhilePlay[3])){
+            Restart();
+            menu = MAIN_MENU;
+        }
+        else{
+            indexTouch = 0;
+            frames = 100;
+        }
+    }
+    if (indexTouch == 1){
+        int key = GetCharPressed();
+        while (key > 0)
+        {
+            if ((key >= 32) && (key <= 125) && (id <= 25))
+            {
+                FilePath.push_back((char)key);
+            }
+            key = GetCharPressed();
+        }
+        if (IsKeyPressed(KEY_BACKSPACE))
+        {
+            if(FilePath.size())
+            FilePath.pop_back();
+        }
+    }
+    if (IsKeyPressed(KEY_ENTER)){
+        CanLoad = DirectoryExists(FilePath.c_str()) && !IsPathFile(FilePath.c_str());
+        if (CanLoad){
+            LoadGame();
+            LoadingSecond = 239;
+            menu = LOADING_PHASE;
+        }
+    }
+    BeginDrawing();
+    ClearBackground(GetColor(0x052c46ff));
+    GameMap.Draw(TrafficLight);
+    character[characterIndex].DrawInGame();
+    DrawRectangle(GetScreenWidth()/2 - 420, GetScreenHeight()/2 - 150, 840, 500, BROWN);
+    DrawRectangle(rec_LoadGameWhilePlay[0].x, rec_LoadGameWhilePlay[0].y, rec_LoadGameWhilePlay[0].width, rec_LoadGameWhilePlay[0].height, DARKBLUE);
+    DrawRectangle(rec_LoadGameWhilePlay[1].x, rec_LoadGameWhilePlay[1].y, rec_LoadGameWhilePlay[1].width, rec_LoadGameWhilePlay[1].height, BLUE);
+    DrawRectangle(rec_LoadGameWhilePlay[2].x, rec_LoadGameWhilePlay[2].y, rec_LoadGameWhilePlay[2].width, rec_LoadGameWhilePlay[2].height, BLUE);
+    DrawRectangle(rec_LoadGameWhilePlay[3].x, rec_LoadGameWhilePlay[3].y, rec_LoadGameWhilePlay[3].width, rec_LoadGameWhilePlay[3].height, BLUE);
+    if (indexMouse) {
+        DrawRectangle(rec_LoadGameWhilePlay[indexMouse - 1].x, rec_LoadGameWhilePlay[indexMouse - 1].y, rec_LoadGameWhilePlay[indexMouse - 1].width, rec_LoadGameWhilePlay[indexMouse - 1].height, Fade(DARKBLUE, 0.3f));
+        DrawRectangleLines(rec_LoadGameWhilePlay[indexMouse - 1].x, rec_LoadGameWhilePlay[indexMouse - 1].y, rec_LoadGameWhilePlay[indexMouse - 1].width, rec_LoadGameWhilePlay[indexMouse - 1].height, DARKBLUE);
+    }
+    DrawText("CHOOSE A FOLDER PATH TO LOAD", GetScreenWidth() / 2 - 400, GetScreenHeight() / 2 - 60, 30, PINK);
+    DrawText(FilePath.c_str(), rec_LoadGameWhilePlay[0].x + 10, rec_LoadGameWhilePlay[0].y + 10, 30, RAYWHITE);
+    if ((frames/15)%2 == 0 && indexTouch == 1) DrawText("|", rec_LoadGameWhilePlay[0].x + 13 + MeasureText(FilePath.c_str(), 30), rec_LoadGameWhilePlay[0].y + 10, 30, RAYWHITE);
+    DrawText(" RESUME ", GetScreenWidth() / 2 - MeasureText(" RESUME ", 30)/2, GetScreenHeight() / 2 + 150, 30, RAYWHITE);
+    DrawText(" LOAD ", GetScreenWidth() / 2 - 50, GetScreenHeight() / 2 + 210, 30, RAYWHITE);
+    DrawText(" EXIT ", GetScreenWidth() / 2 - 50, GetScreenHeight() / 2 + 270, 30, RAYWHITE);
+    if (!CanLoad){
+        DrawText("*WRONG DIRECTORY", GetScreenWidth() / 2 - 400, GetScreenHeight() / 2 + 50, 20, YELLOW);
+    }
+    EndDrawing();
+}
+
 void Menu::SaveGame(){
     ofstream fout;
     fout.open(FilePath + "/gamestate.txt");
@@ -375,3 +473,4 @@ void Menu::SaveGame(){
     GameMap.Save(fout);
     fout.close();
 }
+
