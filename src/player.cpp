@@ -1,17 +1,11 @@
 #include "player.h"
 using namespace std;
-
-
-Character::Character() {
+Character::Character(string name, Vector2 PositionChoose){
     moveside = 0;
     movestate = 0;
-    characterName = "";
-}
-
-Character::Character(string name){
-    moveside = 0;
-    movestate = 0;
-    this->characterName = name;
+    this->name = name;
+    this->PositionChoose = PositionChoose;
+    position = (Vector2){GetScreenWidth()/2 - 32, GetScreenHeight() - 200};
     string Filename = "../data/image/Character/" + name;
     moveState.assign(4, vector <Texture2D> (4));
     // add stand state
@@ -34,69 +28,87 @@ Character::Character(string name){
     }
 }
 Character::~Character(){
-    if (characterName != "")
-        for (int i = 0; i < 4; i ++)
-            for (int j = 0; j < 4; j ++)
-                UnloadTexture(moveState[i][j]);
+    for (int i = 0; i < 4; i ++){
+        for (int j = 0; j < 4; j ++){
+            UnloadTexture(moveState[i][j]);
+        }
+    }
 }
-const string& Character::name() {
-    return characterName;
+void Character::DrawChoose(){
+    DrawTextureEx(moveState[2][0], PositionChoose, 0.0f, 2.0f, WHITE);
+    DrawText(name.c_str(), PositionChoose.x + 20, PositionChoose.y + 150, 30, YELLOW);
 }
-void Character::DrawChoose(Vector2 position){
-    DrawTextureEx(moveState[2][0], position, 0.0f, 2.0f, WHITE);
-    DrawText(characterName.c_str(), position.x + 20, position.y + 150, 30, YELLOW);
-}
-void Character::DrawInGame(Vector2 position){
-    cout << moveside << ' ' << movestate << '\n';
-    cout << position.x << ' ' << position.y << "\n======================================\n";
+void Character::DrawInGame(){
     DrawTextureEx(moveState[moveside][movestate], position, 0.0f, 1.0f, WHITE);
+    DrawText(namePlayer.c_str(), position.x + 30 - MeasureText(namePlayer.c_str(), 20)/2, position.y - 20, 20, RAYWHITE);
+    // DrawRectangleV(position, (Vector2){30, 30}, WHITE);
 }
-void Character::move(int direction) {
-    if (direction == -1)
-        movestate = 0;
-    else {
-        moveside = direction;
-        movestate = (movestate + 1) % 4;
+void Character::ChangeState(short& frames, Map& GameMap){
+    movestate = 0;
+    if (IsKeyDown(KEY_W) || IsKeyDown(KEY_UP)){
+        if (position.y < GetScreenHeight()/2 - 100){
+            position.y < GetScreenHeight()/2 - 100;
+            GameMap.Move(5);
+        }
+        else{
+            position.y -= 5;
+        }
+        if (moveside != 0) frames= 0;
+        moveside = 0;
+        movestate = (frames/5)%4;
+    }
+    if (IsKeyDown(KEY_D) || IsKeyDown(KEY_RIGHT)){
+        position.x += 5;
+        if (position.x > GetScreenWidth() - 30){
+            position.x = GetScreenWidth() - 30;
+        }
+        if (moveside != 1) frames = 0;
+        moveside = 1;
+        movestate = (frames/5)%4;
+    }
+    if (IsKeyDown(KEY_S) || IsKeyDown(KEY_DOWN)){
+        if (position.y > GetScreenHeight() - 60){
+            position.y = GetScreenHeight() - 60;
+        }
+        position.y += 5;
+        if (moveside != 2) frames = 0;
+        moveside = 2;
+        movestate = (frames/5)%4;
+    }
+    if (IsKeyDown(KEY_A) || IsKeyDown(KEY_LEFT)){
+        position.x -= 5;
+        if (position.x < -10){
+            position.x = -10;
+        }
+        if (moveside != 3) frames= 0;
+        moveside = 3;
+        movestate = (frames/5)%4;
+    }
+    if (position.x < -170) position.x = -170;
+    if (position.x > 1010) position.x = 1010;
+}
+void Character::Move(){
+    position.y += 0.5f;
+    if (position.y > GetScreenHeight() - 60){
+        position.y = GetScreenHeight() - 60;
     }
 }
-
-
-
-void Player::SetCharacter(Character *_pCharacter) {
-    pCharacter = _pCharacter;
+void Character::Follow(Map& GameMap, int IncreaseSpeed){
+    GameMap.Follow(position, IncreaseSpeed);
 }
-
-void Player::SetNamePlayer(string playerName){
-    this->playerName = playerName;
-}
-
-void Player::setPosition(Vector2 _position){
-    position = _position;
-}
-
-void Player::draw() {
-    pCharacter->DrawInGame(position);
-}
-
-void Player::move() {
-    int direction = -1;
-
-    if (IsKeyDown(KEY_A) || IsKeyDown(KEY_LEFT)) {
-        position.x = max(0.0f, position.x - 5);
-        direction = 3;
+void Character::CheckCollisionObject(Map& GameMap, bool& isCollided){
+    if (position.y >= GetScreenHeight() - 60){
+        isCollided = true;
+        return;
     }
-    if (IsKeyDown(KEY_D) || IsKeyDown(KEY_RIGHT)) {
-        position.x = min(float (GetScreenWidth()), position.x + 5),
-        direction = 1;
-    }    
-    if (IsKeyDown(KEY_W) || IsKeyDown(KEY_UP)) {
-        position.y = max(GetScreenHeight() / 2.0f, position.y - 5),
-        direction = 0;
-    }
-    if (IsKeyDown(KEY_S) || IsKeyDown(KEY_DOWN)) {
-        position.y = min(float (GetScreenHeight()), position.y + 5),
-        direction = 2;
-    }
-
-    pCharacter->move(direction);
+    GameMap.CheckCollisionObject(position, isCollided);
+}
+void Character::Load(ifstream& fin){
+    fin >> position.x >> position.y;
+    fin.ignore();
+    getline(fin, namePlayer);
+}
+void Character::Save(ofstream& fout){
+    fout << position.x << " " << position.y << '\n';
+    fout << namePlayer << '\n';
 }
