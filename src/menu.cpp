@@ -367,11 +367,11 @@ void Menu::DrawLoadGame(){
     }
     EndDrawing();
 }
-
-void DrawLoadingPhase(){
-    
+void Menu::SaveGame(){
+    ofstream fout;
+    fout.open(FilePath + "/gamestate.txt");
+    fout << level << " " << score << " " << characterIndex << " " << TrafficLight << " " << TrafficLightSecond << '\n';
+    character[characterIndex].Save(fout);
+    GameMap.Save(fout);
+    fout.close();
 }
-void DrawStatusMenu(){
-
-} // appear if you lose/ want to exit
-
