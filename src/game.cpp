@@ -71,6 +71,11 @@ void Game::run(bool& close){
             DrawPlayGame();
             break;
         }
+        case LOSE_MENU:
+        {
+            Menu::DrawLoseMenu();
+            break;
+        }
         default:
         {
             menu = 0;

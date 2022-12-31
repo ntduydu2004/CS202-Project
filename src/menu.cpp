@@ -467,7 +467,6 @@ void Menu::DrawLoadGameWhilePlay(){
     }
     EndDrawing();
 }
-
 void Menu::SaveGame(){
     ofstream fout;
     fout.open(FilePath + "/gamestate.txt");
@@ -476,4 +475,40 @@ void Menu::SaveGame(){
     GameMap.Save(fout);
     fout.close();
 }
-
+void Menu::DrawLoseMenu(){
+    if (CheckCollisionPointRec(mousePosition, rec_LoseMenu[0]))
+        {indexMouse = 1; SetMouseCursor(4);}
+    else if (CheckCollisionPointRec(mousePosition, rec_LoseMenu[1]))
+        {indexMouse = 2; SetMouseCursor(4);}    
+    else 
+        indexMouse = 0;
+    if (IsMouseButtonPressed(0)){
+        if (CheckCollisionPointRec(mousePosition, rec_LoseMenu[0])){
+            Restart();
+            menu = LOADING_PHASE;
+            return;
+        }
+        if (CheckCollisionPointRec(mousePosition, rec_LoseMenu[1])){
+            Restart();
+            menu = MAIN_MENU;
+            return;
+        }
+    }
+    BeginDrawing();
+    ClearBackground(GetColor(0x052c46ff));
+    GameMap.Draw(TrafficLight);
+    character[characterIndex].DrawInGame();
+    // DrawRectangle(GetScreenWidth()/2 - 420, GetScreenHeight()/2 - 250, 840, 500, BROWN);
+    DrawRectangle(rec_LoseMenu[0].x, rec_LoseMenu[0].y, rec_LoseMenu[0].width, rec_LoseMenu[0].height, BLUE);
+    DrawRectangle(rec_LoseMenu[1].x, rec_LoseMenu[1].y, rec_LoseMenu[1].width, rec_LoseMenu[1].height, BLUE);
+    if (indexMouse) {
+        DrawRectangle(rec_LoseMenu[indexMouse - 1].x, rec_LoseMenu[indexMouse - 1].y, rec_LoseMenu[indexMouse - 1].width, rec_LoseMenu[indexMouse - 1].height, Fade(DARKBLUE, 0.3f));
+    }
+    DrawText("BETTER LUCK NEXT TIME^^", GetScreenWidth()/2 - MeasureText("BETTER LUCK NEXT TIME^^", 50)/2, GetScreenHeight()/2 - 25, 50, MAROON);
+    if (score > record){
+        DrawText("CONGRATULATIONS! YOU HAVE BEATEN THE RECORD", GetScreenWidth()/2 - MeasureText("CONGRATULATIONS! YOU HAVE BEATEN THE RECORD", 30)/2, GetScreenHeight()/2 + 55, 30, YELLOW);
+    }
+    DrawText(" RESTART ", GetScreenWidth() / 2 - MeasureText(" RESTART ", 30) / 2, GetScreenHeight() / 2 + 150, 30, RAYWHITE);
+    DrawText(" BACK ", GetScreenWidth() / 2 - 50, GetScreenHeight() / 2 + 210, 30, RAYWHITE);
+    EndDrawing();
+}

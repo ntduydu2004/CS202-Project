@@ -109,5 +109,5 @@ public:
     void DrawChooseCharacter(Character *&pChosenCharacter);
     void Restart();
     void SaveGame();
-
+    void DrawLoseMenu();
 };
