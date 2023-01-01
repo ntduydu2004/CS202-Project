@@ -91,61 +91,7 @@ void Menu::DrawLevelMenu(){
     DrawText(" BACK ", GetScreenWidth() / 2.0f - 50, GetScreenHeight() / 2.0f + 90, 30, RAYWHITE);
     EndDrawing();
 }
-void Menu::DrawScoreboard(){
-    if (CheckCollisionPointRec(mousePosition, rec_ScoreBoard[0]))
-        {indexMouse = 1; SetMouseCursor(4);}
-    else if (CheckCollisionPointRec(mousePosition, rec_ScoreBoard[1]))
-        {indexMouse = 2; SetMouseCursor(4);}
-    else 
-        indexMouse = 0;
-    
-    if (IsMouseButtonPressed(0))
-    {
-        if (CheckCollisionPointRec(mousePosition, rec_ScoreBoard[0])) clearScoreBoard = 1;
-        if (CheckCollisionPointRec(mousePosition, rec_ScoreBoard[1])) menu = 0;
-    }
-    BeginDrawing();
-    ClearBackground(GetColor(0x052c46ff));
-    DrawTextureEx(background, (Vector2){-150, 0}, 0.0f, 1.2f, WHITE);
-    DrawRectangle(rec_ScoreBoard[0].x, rec_ScoreBoard[0].y, rec_ScoreBoard[0].width, rec_ScoreBoard[0].height, BROWN);
-    DrawRectangle(rec_ScoreBoard[1].x, rec_ScoreBoard[1].y, rec_ScoreBoard[1].width, rec_ScoreBoard[1].height, BROWN);
-    if (indexMouse) {
-        DrawRectangle(rec_ScoreBoard[indexMouse - 1].x, rec_ScoreBoard[indexMouse - 1].y, rec_ScoreBoard[indexMouse - 1].width, rec_ScoreBoard[indexMouse - 1].height, Fade(DARKBROWN, 0.3f));
-        DrawRectangleLines(rec_ScoreBoard[indexMouse - 1].x, rec_ScoreBoard[indexMouse - 1].y, rec_ScoreBoard[indexMouse - 1].width, rec_ScoreBoard[indexMouse - 1].height, RAYWHITE);
-    }
-    if (clearScoreBoard){
-        DrawRectangle(GetScreenWidth() / 2.0f - 325, GetScreenHeight() / 2.0f - 210, 645, 65,LIME);
-        DrawTextEx(font,"THERE IS NO ACHIEVEMENT HERE!!", (Vector2){GetScreenWidth() / 2.0f - 320, GetScreenHeight() / 2.0f - 200}, 50, 2, MAROON);
-    }
-    DrawText(" CLEAR ", GetScreenWidth() / 2.0f - 60, GetScreenHeight() / 2.0f + 150, 30, RAYWHITE);
-    DrawText(" BACK ", GetScreenWidth() / 2.0f - 50, GetScreenHeight() / 2.0f + 210, 30, RAYWHITE);
-    EndDrawing();
-}
-void Menu::DrawInstructions(){
-    if (CheckCollisionPointRec(mousePosition, rec_Instruction))
-        {indexMouse = 1; SetMouseCursor(4);}
-    else 
-        indexMouse = 0;
-    if (IsMouseButtonPressed(0))
-    {
-        if (CheckCollisionPointRec(mousePosition, rec_Instruction)) menu = 0;
-    }
-    BeginDrawing();
-    ClearBackground(GetColor(0x052c46ff));
-    DrawTextureEx(background, (Vector2){-150, 0}, 0.0f, 1.2f, WHITE);
-    DrawTextureEx(woodboard,(Vector2){GetScreenWidth() / 2.0f - 363, GetScreenHeight() / 2.0f - 237},0.0f, 0.7f, WHITE);
-    DrawTextureEx(woodboard,(Vector2){GetScreenWidth() / 2.0f - 363, GetScreenHeight() / 2.0f - 187},0.0f, 0.7f, WHITE);
-    DrawRectangle(rec_Instruction.x, rec_Instruction.y, rec_Instruction.width, rec_Instruction.height, BROWN);
-    if (indexMouse){
-        DrawRectangle(rec_Instruction.x, rec_Instruction.y, rec_Instruction.width, rec_Instruction.height, Fade(DARKBROWN, 0.3f));
-        DrawRectangleLines(rec_Instruction.x, rec_Instruction.y, rec_Instruction.width, rec_Instruction.height, RAYWHITE);
-    }
-    DrawTextEx(font,"USE W, A, S, D TO MOVE ", (Vector2){GetScreenWidth() / 2.0f - 350, GetScreenHeight() / 2.0f - 230}, 30, 2, YELLOW);
-    DrawTextEx(font,"STAY AWAY FROM OBSTACLES !!! ",(Vector2){GetScreenWidth() / 2.0f - 350, GetScreenHeight() / 2.0f - 200}, 30, 2, YELLOW);
-    DrawTextEx(font,"SURVIVE AS LONG AS POSSIBLE ^^ ",(Vector2){GetScreenWidth() / 2.0f - 350, GetScreenHeight() / 2.0f - 170}, 30, 2, YELLOW);
-    DrawText(" BACK ", GetScreenWidth() / 2.0f - 50, GetScreenHeight() / 2.0f + 90, 30, RAYWHITE);
-    EndDrawing();
-}
+
 void Menu::DrawEnterNamePhase(){
     if (CheckCollisionPointRec(mousePosition, rec_EnterName[0])) {
         indexMouse = 1;

@@ -103,9 +103,7 @@ public:
     void DrawLoadGame();
     void DrawLoadGameWhilePlay(); // appear if you press T
     void DrawSaveGameWhilePlay(); // appear if you press L
-    void DrawScoreboard();
     void DrawEnterNamePhase();
-    void DrawInstructions();
     void DrawChooseCharacter(Character *&pChosenCharacter);
     void Restart();
     void SaveGame();
