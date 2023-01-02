@@ -458,3 +458,20 @@ void Menu::DrawLoseMenu(){
     DrawText(" BACK ", GetScreenWidth() / 2 - 50, GetScreenHeight() / 2 + 210, 30, RAYWHITE);
     EndDrawing();
 }
+void Menu::DrawLoadingPhase(){
+    BeginDrawing();
+    ClearBackground(GetColor(0x052c46ff));
+    GameMap.Draw(TrafficLight);
+    character[characterIndex].DrawInGame();
+    if (LoadingSecond == 0){
+        menu = PLAY_GAME;
+        frames = 1;
+    }
+    if (LoadingSecond >= 60){
+        DrawText(TextFormat("%i", LoadingSecond/60), GetScreenWidth()/2 - 100, GetScreenHeight()/2 - 200, 400, DARKBLUE);
+    }
+    else{
+        DrawText("START!!!", GetScreenWidth()/2 - MeasureText("START!!!", 200)/2, GetScreenHeight()/2 - 100, 200, DARKBLUE);
+    }
+    EndDrawing();
+}
