@@ -475,3 +475,50 @@ void Menu::DrawLoadingPhase(){
     }
     EndDrawing();
 }
+
+void Menu::DrawExitMenu(){
+    if (CheckCollisionPointRec(mousePosition, rec_Exit[0]))
+        {indexMouse = 1; SetMouseCursor(4);}
+    else if (CheckCollisionPointRec(mousePosition, rec_Exit[1]))
+        {indexMouse = 2; SetMouseCursor(4);}    
+    else if (CheckCollisionPointRec(mousePosition, rec_Exit[2]))
+        {indexMouse = 3; SetMouseCursor(4);}    
+    else if (CheckCollisionPointRec(mousePosition, rec_Exit[3]))
+        {indexMouse = 4; SetMouseCursor(4);}    
+    else
+        indexMouse = 0;
+    
+    if (IsMouseButtonPressed(0)){
+        if (CheckCollisionPointRec(mousePosition, rec_Exit[0])){
+            menu = PLAY_GAME;
+        }
+        if (CheckCollisionPointRec(mousePosition, rec_Exit[1])){
+            Restart();
+            menu = LOADING_PHASE;
+        }
+        if (CheckCollisionPointRec(mousePosition, rec_Exit[2])){
+            menu = SAVE_GAME;
+        }
+        if (CheckCollisionPointRec(mousePosition, rec_Exit[3])){
+            Restart();
+            menu = MAIN_MENU;
+        }
+    }
+
+    BeginDrawing();
+    ClearBackground(GetColor(0x052c46ff));
+    GameMap.Draw(TrafficLight);
+    character[characterIndex].DrawInGame();
+    DrawRectangle(rec_Exit[0].x, rec_Exit[0].y, rec_Exit[0].width, rec_Exit[0].height, BLUE);
+    DrawRectangle(rec_Exit[1].x, rec_Exit[1].y, rec_Exit[1].width, rec_Exit[1].height, BLUE);
+    DrawRectangle(rec_Exit[2].x, rec_Exit[2].y, rec_Exit[2].width, rec_Exit[2].height, BLUE);
+    DrawRectangle(rec_Exit[3].x, rec_Exit[3].y, rec_Exit[3].width, rec_Exit[3].height, BLUE);
+    if (indexMouse) {
+        DrawRectangle(rec_Exit[indexMouse - 1].x, rec_Exit[indexMouse - 1].y, rec_Exit[indexMouse - 1].width, rec_Exit[indexMouse - 1].height, Fade(DARKBLUE, 0.3f));
+    }
+    DrawText(" RESUME ", GetScreenWidth() / 2 - MeasureText(" RESUME ", 30) / 2, GetScreenHeight() / 2 - 90, 30, RAYWHITE);
+    DrawText(" RESTART ", GetScreenWidth() / 2 - MeasureText(" RESTART ", 30) / 2, GetScreenHeight() / 2 - 30, 30, RAYWHITE);
+    DrawText(" SAVE ", GetScreenWidth() / 2 - MeasureText(" SAVE ", 30) / 2, GetScreenHeight() / 2 + 30, 30, RAYWHITE);
+    DrawText(" EXIT ", GetScreenWidth() / 2 - MeasureText(" EXIT ", 30) / 2, GetScreenHeight() / 2 + 90, 30, RAYWHITE);
+    EndDrawing();
+}

@@ -4,7 +4,6 @@
 #include "raylib.h"
 #include "raygui.h"
 #include "menu.h"
-#include "obstacle.h"
 #include "map.h"
 #include "player.h"
 

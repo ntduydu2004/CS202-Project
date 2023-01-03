@@ -28,6 +28,8 @@ protected:
     Texture2D woodboard = LoadTexture("../data/image/Map/woodboard.png");
     Character character[3] = { Character("Ekko"), Character("Wukong"), Character("Samira")};
 
+    Map GameMap;
+    
     short menu = 0, id = 0, characterIndex = 0; 
     short frames = 0;
     float acceleration = 0;
@@ -95,12 +97,20 @@ protected:
         {GetScreenWidth() / 2 - 150, GetScreenHeight() / 2 + 200, 300, 50},
         {GetScreenWidth() / 2 - 150, GetScreenHeight() / 2 + 260, 300, 50},
     };
+    Rectangle rec_Exit[4] =
+    {
+        {GetScreenWidth() / 2 - 150, GetScreenHeight() / 2 - 100, 300, 50},
+        {GetScreenWidth() / 2 - 150, GetScreenHeight() / 2 - 40, 300, 50},
+        {GetScreenWidth() / 2 - 150, GetScreenHeight() / 2 + 20, 300, 50},
+        {GetScreenWidth() / 2 - 150, GetScreenHeight() / 2 + 80, 300, 50},
+    };
     
 public:
     ~Menu();
     void DrawMainMenu();
     void DrawLevelMenu();
     void DrawLoadGame();
+    void DrawExitMenu();
     void DrawLoadGameWhilePlay(); // appear if you press T
     void DrawSaveGameWhilePlay(); // appear if you press L
     void DrawEnterNamePhase();
