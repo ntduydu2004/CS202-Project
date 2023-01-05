@@ -119,4 +119,5 @@ public:
     void SaveGame();
     void DrawLoseMenu();
     void DrawLoadingPhase();
+    void DrawSaveGame();
 };
