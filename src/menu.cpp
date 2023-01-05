@@ -163,63 +163,6 @@ void Menu::DrawEnterNamePhase(){
     DrawText(" BACK ", GetScreenWidth() / 2 - 50, GetScreenHeight() / 2 + 210, 30, RAYWHITE);
     EndDrawing();
 }
-void Menu::DrawChooseCharacter(Character *&pChosenCharacter){
-    indexMouse = 0;
-    for (int i = 0; i <= 4; ++i)
-        if (CheckCollisionPointRec(mousePosition, rec_ChooseCharacter[i])) {
-            indexMouse = i + 1;
-            SetMouseCursor(4);
-            break;
-        }
-    
-    if (IsKeyPressed(KEY_ESCAPE)) menu = ENTER_NAME;
-    if (IsMouseButtonPressed(0)) {
-        indexTouch = 0;
-        for (int i = 0; i <= 4; ++i)
-            if (CheckCollisionPointRec(mousePosition, rec_ChooseCharacter[i])) {
-                if (i <= 2) {// character
-                    characterIndex = i, indexTouch = i + 1;
-                    cout << characterIndex << "====\n";
-                }
-                else // game state
-                    menu = (i == 3) ? PLAY_GAME : ENTER_NAME;
-                break;
-            }
-
-        if (menu == PLAY_GAME) {
-            pChosenCharacter = &character[characterIndex];
-        }
-    }
-
-    BeginDrawing();
-    ClearBackground(GetColor(0x052c46ff));
-    DrawTextureEx(background, (Vector2){-150, 0}, 0.0f, 1.2f, WHITE);
-
-    for (int i = 0; i <= 4; ++i)
-        DrawRectangle(rec_ChooseCharacter[i].x, rec_ChooseCharacter[i].y, rec_ChooseCharacter[i].width, rec_ChooseCharacter[i].height, BROWN);
-
-    if (indexMouse){
-        DrawRectangle(rec_ChooseCharacter[indexMouse - 1].x, rec_ChooseCharacter[indexMouse - 1].y, rec_ChooseCharacter[indexMouse - 1].width, rec_ChooseCharacter[indexMouse - 1].height, Fade(LIME, 0.5f));
-       // DrawRectangleLines(rec_ChooseCharacter[indexTouch - 1].x, rec_ChooseCharacter[indexTouch - 1].y, rec_ChooseCharacter[indexTouch - 1].width, rec_ChooseCharacter[indexTouch - 1].height, RAYWHITE);
-    }
-
-    if (1 <= indexMouse && indexMouse <= 4){
-        DrawRectangleLines(rec_ChooseCharacter[indexMouse - 1].x, rec_ChooseCharacter[indexMouse - 1].y, rec_ChooseCharacter[indexMouse - 1].width, rec_ChooseCharacter[indexMouse - 1].height, RAYWHITE);
-    }
-
-    if (indexTouch){
-        DrawRectangle(rec_ChooseCharacter[indexTouch - 1].x, rec_ChooseCharacter[indexTouch - 1].y, rec_ChooseCharacter[indexTouch - 1].width, rec_ChooseCharacter[indexTouch - 1].height, Fade(LIME, 0.5f));
-        DrawRectangleLines(rec_ChooseCharacter[indexTouch - 1].x, rec_ChooseCharacter[indexTouch - 1].y, rec_ChooseCharacter[indexTouch - 1].width, rec_ChooseCharacter[indexTouch - 1].height, RAYWHITE);
-    }
-
-    DrawTextEx(font, "CHOOSE YOUR CHARACTER", (Vector2){GetScreenWidth() / 2.0f - 700 / 2, GetScreenHeight() / 2.0f - 230}, 70, 2, DARKGREEN);
-    DrawText(" PLAY ", GetScreenWidth() / 2.0f - 50, GetScreenHeight() / 2.0f + 150, 30, RAYWHITE);
-    DrawText(" BACK ", GetScreenWidth() / 2.0f - 50, GetScreenHeight() / 2.0f + 210, 30, RAYWHITE);
-    character[0].DrawChoose((Vector2){GetScreenWidth() / 2.0f - 365, GetScreenHeight() / 2.0f - 125});
-    character[1].DrawChoose((Vector2){GetScreenWidth() / 2.0f - 65, GetScreenHeight() / 2.0f - 125});
-    character[2].DrawChoose((Vector2){GetScreenWidth() / 2.0f + 235, GetScreenHeight() / 2.0f - 125});
-    EndDrawing();
-}
 
 void Menu::Restart(){
     GameMap.Restart();

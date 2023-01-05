@@ -114,7 +114,6 @@ public:
     void DrawLoadGameWhilePlay(); // appear if you press T
     void DrawSaveGameWhilePlay(); // appear if you press L
     void DrawEnterNamePhase();
-    void DrawChooseCharacter(Character *&pChosenCharacter);
     void Restart();
     void SaveGame();
     void DrawLoseMenu();
