@@ -116,6 +116,7 @@ public:
     void DrawEnterNamePhase();
     void Restart();
     void SaveGame();
+    void LoadGame();
     void DrawLoseMenu();
     void DrawLoadingPhase();
     void DrawSaveGame();

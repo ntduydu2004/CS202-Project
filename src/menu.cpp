@@ -364,6 +364,16 @@ void Menu::SaveGame(){
     GameMap.Save(fout);
     fout.close();
 }
+
+void Menu::LoadGame(){
+    ifstream fin;
+    fin.open(FilePath + "/gamestate.txt");
+    fin >> level >> score >> characterIndex >> TrafficLight >> TrafficLightSecond;
+    character[characterIndex].Load(fin);
+    GameMap.Load(fin);
+    fin.close();
+}
+
 void Menu::DrawLoseMenu(){
     if (CheckCollisionPointRec(mousePosition, rec_LoseMenu[0]))
         {indexMouse = 1; SetMouseCursor(4);}
