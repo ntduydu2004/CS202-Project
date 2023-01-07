@@ -139,4 +139,5 @@ public:
     void DrawLoseMenu();
     void DrawLoadingPhase();
     void DrawChooseCharacter();
+    void DrawInstructions();
 };
