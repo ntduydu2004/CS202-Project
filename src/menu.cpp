@@ -627,3 +627,26 @@ void Menu::DrawChooseCharacter(){
     character[2].DrawChoose();
     EndDrawing();
 }
+void Menu::DrawInstructions(){
+    if (CheckCollisionPointRec(mousePosition, rec_Instruction))
+        {indexMouse = 1; SetMouseCursor(4);}
+    else 
+        indexMouse = 0;
+    if (IsMouseButtonPressed(0))
+    {
+        if (CheckCollisionPointRec(mousePosition, rec_Instruction)) menu = 0;
+    }
+    BeginDrawing();
+    ClearBackground(GetColor(0x052c46ff));
+    DrawTextureEx(background, (Vector2){-150, 0}, 0.0f, 1.2f, WHITE);
+    DrawRectangle(rec_Instruction.x, rec_Instruction.y, rec_Instruction.width, rec_Instruction.height, BLUE);
+    if (indexMouse){
+        DrawRectangle(rec_Instruction.x, rec_Instruction.y, rec_Instruction.width, rec_Instruction.height, Fade(DARKBLUE, 0.3f));
+        DrawRectangleLines(rec_Instruction.x, rec_Instruction.y, rec_Instruction.width, rec_Instruction.height, DARKBLUE);
+    }
+    DrawText("USE W, A, S, D TO MOVE ", GetScreenWidth() / 2 - 350, GetScreenHeight() / 2 - 230, 30, MAROON);
+    DrawText("STAY AWAY FROM OBSTACLES !!! ", GetScreenWidth() / 2 - 350, GetScreenHeight() / 2 - 180, 30, MAROON);
+    DrawText("SURVIVE AS LONG AS POSSIBLE ^^ ", GetScreenWidth() / 2 - 350, GetScreenHeight() / 2 - 130, 30, MAROON);
+    DrawText(" BACK ", GetScreenWidth() / 2 - 50, GetScreenHeight() / 2 + 90, 30, RAYWHITE);
+    EndDrawing();
+}
