@@ -1,7 +1,6 @@
 #pragma once
 #include <bits/stdc++.h>
-#include "raylib.h"
-#include "raygui.h"
+#include "lane.h"
 
 using namespace std;
 

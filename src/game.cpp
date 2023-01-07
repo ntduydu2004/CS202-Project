@@ -48,17 +48,7 @@ void Game::run(bool& close){
         }
         case CHOOSE_CHARACTER:
         {
-            Character *pchosenCharacter = nullptr;
-            Menu::DrawChooseCharacter(pchosenCharacter);
-            
-            if (pchosenCharacter) {
-                player.SetCharacter(pchosenCharacter);
-                player.setPosition(Vector2({GetScreenWidth() / 2.0f - 65, GetScreenHeight() - 100.0f}));
-                
-                cout << pchosenCharacter->name() << '\n';
-                cout << GetScreenWidth() / 2.0f << ' ' << GetScreenHeight() - 200.0f << '\n';
-            }
-            
+            Menu::DrawChooseCharacter();
             break;
         }
         // case STATUS_MENU:
@@ -84,10 +74,46 @@ void Game::run(bool& close){
     }
     DrawFPS(10, 10);
 }
-
-void Game::DrawPlayGame() {
-    BeginDrawing();
-    gameMap.draw();
-    player.draw();
-    EndDrawing();
+void Game::SaveScore(){
+    string FilePath = "../data/scoreboard.txt";
+    ofstream fout;
+    fout.open(FilePath);
+    fout << record << '\n';
+    fout << numScore << '\n';
+    for (int i = 0; i < numScore; i ++){
+        fout << UserScoreList[i] << '\n';
+    }
+    for (int i = 0; i < numScore; i ++){
+        fout << ScoreList[i] << '\n';
+    }
+    for (int i = 0; i < numScore; i ++){
+        fout << ScoreLevel[i] << '\n';
+    }
+    fout.close();
+}
+void Game::LoadScore(){
+    string FilePath = "../data/scoreboard.txt";
+    ifstream fin;
+    fin.open(FilePath);
+    fin >> record >> numScore;
+    fin.ignore();
+    ScoreList.clear();
+    UserScoreList.clear();
+    ScoreLevel.clear();
+    for (int i = 0; i < numScore; i ++){
+        string tmp;
+        getline(fin, tmp);
+        UserScoreList.push_back(tmp);
+    }
+    for (int i = 0; i < numScore; i ++){
+        int tmp;
+        fin >> tmp;
+        ScoreList.push_back(tmp);
+    }
+    for (int i = 0; i < numScore; i ++){
+        int tmp;
+        fin >> tmp;
+        ScoreLevel.push_back(tmp);
+    }
+    fin.close();
 }

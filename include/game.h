@@ -10,11 +10,11 @@
 
 class Game: public Menu {
 private:
-    Map gameMap;
-    Player player;
     
 public:
-    void DrawPlayGame();
+    Game(){};
+    ~Game(){};
     void run(bool& close);
-    void saveGame();
+    void SaveScore();
+    void LoadScore();
 };

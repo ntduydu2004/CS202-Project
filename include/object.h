@@ -87,4 +87,5 @@ public:
     void CheckCollisionObject(ObjectFactory& objectfactory, Vector2& position, bool& isCollided);
     void Load(ifstream& fin);
     void Save(ofstream& fout);
+    bool GetDirection();
 };
