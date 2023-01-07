@@ -14,3 +14,9 @@ void Lane::Draw(Vector2 position){
 short Lane::GetHeight(){
     return height;
 }
+void LaneFactory::Draw(int type, Vector2 position){
+    lane[type].Draw(position);
+}
+short LaneFactory::GetHeight(int type){
+    return lane[type].GetHeight();
+}
