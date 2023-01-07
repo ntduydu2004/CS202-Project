@@ -1,12 +1,28 @@
 #include "lane.h"
 using namespace std;
 
+Lane::Lane(string TypeOfLane, short height){
+    string Filename = "../data/image/Lane/" + TypeOfLane + ".png";
+    Pic = LoadTexture(Filename.c_str());
+    this->height = height;
+}
+Lane::~Lane(){
+    UnloadTexture(Pic);
+}
+void Lane::Draw(Vector2 position){
+    DrawTextureEx(Pic, position, 0.0f, 1.0f, WHITE);
+}
+short Lane::GetHeight(){
+    return height;
+}
+
 void LaneFactory::Draw(int type, Vector2 position){
     lane[type].Draw(position);
 }
 short LaneFactory::GetHeight(int type){
     return lane[type].GetHeight();
 }
+
 MovingLane::MovingLane(Vector2 position, int type, short height, int ChangeDirect){
     this->type = type;
     this->position = position;
