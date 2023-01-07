@@ -25,15 +25,18 @@ class Menu {
 protected:
     Font font=LoadFont("../data/font/AllTheWayToTheSun-o2O0.ttf");
     Texture2D background = LoadTexture("../data/image/Background/Background.png");
-    Texture2D woodboard = LoadTexture("../data/image/Map/woodboard.png");
-    Character character[3] = { Character("Ekko"), Character("Wukong"), Character("Samira")};
+    Character character[3] =
+    {
+        Character("Ekko", (Vector2){GetScreenWidth() / 2 - 365, GetScreenHeight() / 2 - 125}),
+        Character("Wukong", (Vector2){GetScreenWidth() / 2 - 65, GetScreenHeight() / 2 - 125}),
+        Character("Samira", (Vector2){GetScreenWidth() / 2 + 235, GetScreenHeight() / 2 - 125}),
+    };
 
     Map GameMap;
-    
+
     short menu = 0, id = 0, characterIndex = 0; 
-    short frames = 0;
+    short frames = 0, framesCharacter = 0;
     float acceleration = 0;
-    bool close = false, clearScoreBoard = true;
     bool touch = false, CanLoad = true, CanSave = true;
 
     Vector2 mousePosition;
@@ -48,6 +51,10 @@ protected:
     bool isCollided = false;
     int record = 0;
 
+    vector <int> ScoreList;
+    vector <string> UserScoreList;
+    vector <int> ScoreLevel;
+    int numScore = 0;
 
     Rectangle rec_Mode[5] =
     {
@@ -84,6 +91,11 @@ protected:
         {GetScreenWidth() / 2.0f - 150, GetScreenHeight() / 2.0f + 140, 300, 50},
         {GetScreenWidth() / 2.0f - 150, GetScreenHeight() / 2.0f + 200, 300, 50},
     };
+    Rectangle rec_LoseMenu[2] =
+    {
+        {GetScreenWidth() / 2 - 150, GetScreenHeight() / 2 + 140, 300, 50},
+        {GetScreenWidth() / 2 - 150, GetScreenHeight() / 2 + 200, 300, 50},
+    };
       Rectangle rec_LoadGame[3] = 
     {
         {GetScreenWidth() / 2 - 400, GetScreenHeight() / 2 - 25, 800, 50},
@@ -91,6 +103,13 @@ protected:
         {GetScreenWidth() / 2 - 150, GetScreenHeight() / 2 + 200, 300, 50},
     };
       Rectangle rec_LoadGameWhilePlay[4] =
+    {
+        {GetScreenWidth() / 2 - 400, GetScreenHeight() / 2 - 25, 800, 50},
+        {GetScreenWidth() / 2 - 150, GetScreenHeight() / 2 + 140, 300, 50},
+        {GetScreenWidth() / 2 - 150, GetScreenHeight() / 2 + 200, 300, 50},
+        {GetScreenWidth() / 2 - 150, GetScreenHeight() / 2 + 260, 300, 50},
+    };
+    Rectangle rec_SaveGame[4] = 
     {
         {GetScreenWidth() / 2 - 400, GetScreenHeight() / 2 - 25, 800, 50},
         {GetScreenWidth() / 2 - 150, GetScreenHeight() / 2 + 140, 300, 50},
@@ -112,13 +131,12 @@ public:
     void DrawLoadGame();
     void DrawExitMenu();
     void DrawLoadGameWhilePlay(); // appear if you press T
-    void DrawSaveGameWhilePlay(); // appear if you press L
+    void DrawSaveGame(); // appear if you press L
     void DrawEnterNamePhase();
     void Restart();
     void SaveGame();
     void LoadGame();
     void DrawLoseMenu();
     void DrawLoadingPhase();
-    void DrawSaveGame();
     void DrawChooseCharacter();
 };

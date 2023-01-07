@@ -5,16 +5,23 @@
 
 using namespace std;
 
-class Map {
+class Map{
 private:
-    Texture2D grass = LoadTexture("../data/image/Map/Full grass.png");
-    Texture2D doublepath = LoadTexture("../data/image/Map/doublepath.png");
-    Texture2D singlepath = LoadTexture("../data/image/Map/singlepath.png");
-    Texture2D river = LoadTexture("../data/image/Map/river.png");
-    Texture2D woodboard = LoadTexture("../data/image/Map/woodboard.png");
-
+    LaneFactory laneFactory;
+    ObjectFactory objectFactory;
+    vector <MovingLane> lane;
+    int prevType;
 public:
-    ~Map();
-    void draw();
+    short x;
+    Map();
+    ~Map(){};
+    void Move(float p = 0.5);
+    void MoveObjectX(int TrafficLight, float IncreaseSpeed);
+    void Fill();
+    void Draw(int TrafficLight);
+    void Follow(Vector2& position, float IncreaseSpeed);
+    void CheckCollisionObject(Vector2& position, bool& isCollided);
     void Restart();
+    void Load(ifstream& fin);
+    void Save(ofstream& fout);
 };
