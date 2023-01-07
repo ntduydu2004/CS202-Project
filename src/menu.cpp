@@ -572,3 +572,58 @@ void Menu::DrawSaveGame(){
     }
     EndDrawing();
 }
+void Menu::DrawChooseCharacter(){
+    if (CheckCollisionPointRec(mousePosition, rec_ChooseCharacter[0]))
+        {indexMouse = 1; SetMouseCursor(4);}
+    else if (CheckCollisionPointRec(mousePosition, rec_ChooseCharacter[1]))
+        {indexMouse = 2; SetMouseCursor(4);}
+    else if (CheckCollisionPointRec(mousePosition, rec_ChooseCharacter[2]))
+        {indexMouse = 3; SetMouseCursor(4);}
+    else if (CheckCollisionPointRec(mousePosition, rec_ChooseCharacter[3]))
+        {indexMouse = 4; SetMouseCursor(4);}
+    else if (CheckCollisionPointRec(mousePosition, rec_ChooseCharacter[4]))
+        {indexMouse = 5; SetMouseCursor(4);}
+    else 
+        indexMouse = 0;
+    if (IsKeyPressed(KEY_ESCAPE)) menu = ENTER_NAME;
+    if (IsMouseButtonPressed(0))
+    {
+        if (CheckCollisionPointRec(mousePosition, rec_ChooseCharacter[0])) characterIndex = 0, indexTouch = 1;
+        else if (CheckCollisionPointRec(mousePosition, rec_ChooseCharacter[1])) characterIndex = 1, indexTouch = 2;
+        else if (CheckCollisionPointRec(mousePosition, rec_ChooseCharacter[2])) characterIndex = 2, indexTouch = 3;
+        else if (CheckCollisionPointRec(mousePosition, rec_ChooseCharacter[3])){
+            acceleration = (level - 1)*2;
+            LoadingSecond = 239;
+            menu = LOADING_PHASE;
+            character[characterIndex].namePlayer = (string)name;
+            isCollided = false;
+        }
+        else if (CheckCollisionPointRec(mousePosition, rec_ChooseCharacter[4])) menu = 6;
+        else indexTouch = 0;
+    }
+    BeginDrawing();
+    ClearBackground(GetColor(0x052c46ff));
+    DrawTextureEx(background, (Vector2){-150, 0}, 0.0f, 1.2f, WHITE);
+    DrawRectangle(rec_ChooseCharacter[0].x, rec_ChooseCharacter[0].y, rec_ChooseCharacter[0].width, rec_ChooseCharacter[0].height, BLUE);
+    DrawRectangle(rec_ChooseCharacter[1].x, rec_ChooseCharacter[1].y, rec_ChooseCharacter[1].width, rec_ChooseCharacter[1].height, BLUE);
+    DrawRectangle(rec_ChooseCharacter[2].x, rec_ChooseCharacter[2].y, rec_ChooseCharacter[2].width, rec_ChooseCharacter[2].height, BLUE);
+    DrawRectangle(rec_ChooseCharacter[3].x, rec_ChooseCharacter[3].y, rec_ChooseCharacter[3].width, rec_ChooseCharacter[3].height, BLUE);
+    DrawRectangle(rec_ChooseCharacter[4].x, rec_ChooseCharacter[4].y, rec_ChooseCharacter[4].width, rec_ChooseCharacter[4].height, BLUE);
+    if (1 <= indexMouse && indexMouse <= 3){
+        DrawRectangle(rec_ChooseCharacter[indexMouse - 1].x, rec_ChooseCharacter[indexMouse - 1].y, rec_ChooseCharacter[indexMouse - 1].width, rec_ChooseCharacter[indexMouse - 1].height, Fade(DARKBLUE, 0.3f));
+    }
+    else if (indexMouse >= 4) {
+        DrawRectangle(rec_ChooseCharacter[indexMouse - 1].x, rec_ChooseCharacter[indexMouse - 1].y, rec_ChooseCharacter[indexMouse - 1].width, rec_ChooseCharacter[indexMouse - 1].height, Fade(DARKBLUE, 0.3f));
+        DrawRectangleLines(rec_ChooseCharacter[indexMouse - 1].x, rec_ChooseCharacter[indexMouse - 1].y, rec_ChooseCharacter[indexMouse - 1].width, rec_ChooseCharacter[indexMouse - 1].height, DARKBLUE);
+    }
+    if (indexTouch){
+        DrawRectangle(rec_ChooseCharacter[indexTouch - 1].x, rec_ChooseCharacter[indexTouch - 1].y, rec_ChooseCharacter[indexTouch - 1].width, rec_ChooseCharacter[indexTouch - 1].height, DARKBLUE);
+    }
+    DrawText("CHOOSE YOUR CHARACTER", GetScreenWidth() / 2 - MeasureText("CHOOSE YOUR CHARACTER", 50) / 2, GetScreenHeight() / 2 - 230, 50, MAROON);
+    DrawText(" PLAY ", GetScreenWidth() / 2 - 50, GetScreenHeight() / 2 + 150, 30, RAYWHITE);
+    DrawText(" BACK ", GetScreenWidth() / 2 - 50, GetScreenHeight() / 2 + 210, 30, RAYWHITE);
+    character[0].DrawChoose();
+    character[1].DrawChoose();
+    character[2].DrawChoose();
+    EndDrawing();
+}
