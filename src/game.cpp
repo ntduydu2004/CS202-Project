@@ -57,8 +57,22 @@ void Game::run(bool& close){
         // }
         case PLAY_GAME:
         {
-            player.move();
-            DrawPlayGame();
+            frames %= 300;
+            if (frames == 0) acceleration += 0.2;
+            score ++;
+            TrafficLightSecond--;
+            if (TrafficLightSecond == -1){
+                TrafficLight = (TrafficLight + 1)%3;
+                if (TrafficLight == LIGHT_YELLOW) TrafficLightSecond = 180;
+                if (TrafficLight == LIGHT_RED) TrafficLightSecond = 300;
+                if (TrafficLight == LIGHT_GREEN) TrafficLightSecond = 600;
+            }
+            GameMap.Move();
+            GameMap.MoveObjectX(TrafficLight, acceleration);
+            GameMap.Fill();
+            character[characterIndex].Move();
+            character[characterIndex].Follow(GameMap, acceleration);
+            Menu::DrawPlayGame();
             break;
         }
         case LOSE_MENU:

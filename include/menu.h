@@ -140,4 +140,5 @@ public:
     void DrawLoadingPhase();
     void DrawChooseCharacter();
     void DrawInstructions();
+    void DrawPlayGame();
 };

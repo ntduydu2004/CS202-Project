@@ -650,3 +650,45 @@ void Menu::DrawInstructions(){
     DrawText(" BACK ", GetScreenWidth() / 2 - 50, GetScreenHeight() / 2 + 90, 30, RAYWHITE);
     EndDrawing();
 }
+
+void Menu::DrawPlayGame() {
+    character[characterIndex].ChangeState(framesCharacter, GameMap);
+    if (IsKeyPressed(KEY_P)) menu = STATUS_MENU;
+    if (IsKeyPressed(KEY_T)) menu = LOAD_GAME_PLAY;
+    if (IsKeyPressed(KEY_L)) menu = SAVE_GAME;
+    character[characterIndex].CheckCollisionObject(GameMap, isCollided);
+
+    if (isCollided) {
+        menu = LOSE_MENU;
+        score /= 3;
+        ScoreList.push_back(score);
+        UserScoreList.push_back(character[characterIndex].namePlayer);
+        ScoreLevel.push_back(level);
+        if (UserScoreList.back() == "")
+            UserScoreList.back() = "Nameless Player";
+        numScore ++;
+        if (numScore > 5) {
+            numScore = 5;
+            ScoreList.erase(ScoreList.begin());
+            UserScoreList.erase(UserScoreList.begin());
+            ScoreLevel.erase(ScoreLevel.begin());
+        }
+    }
+
+    BeginDrawing();
+    ClearBackground(GetColor(0x052c46ff));
+    GameMap.Draw(TrafficLight);
+    character[characterIndex].DrawInGame();
+    DrawRectangle(10, 10, 250, 50, BLACK);
+    DrawRectangle(10, 70, 250, 50, BLACK);
+
+    if (TrafficLight == LIGHT_GREEN)
+        DrawText(TextFormat("GREEN: %i", (TrafficLightSecond/60)), 20, 20, 30, GREEN);
+    if (TrafficLight == LIGHT_RED)
+        DrawText(TextFormat("RED: %i", (TrafficLightSecond/60)), 20, 20, 30, RED);
+    if (TrafficLight == LIGHT_YELLOW)
+        DrawText(TextFormat("YELLOW: %i", (TrafficLightSecond/60)), 20, 20, 30, YELLOW);
+
+    DrawText(TextFormat("SCORE: %i", score/3), 20, 80, 30, VIOLET);
+    EndDrawing();
+}
