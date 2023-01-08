@@ -2,6 +2,7 @@
 using namespace std;
 void Game::run(bool& close){
     frames++;
+    framesCharacter++;
     mousePosition = GetMousePosition();
     touchPosition = GetTouchPosition(0);
     SetMouseCursor(0);
@@ -22,10 +23,11 @@ void Game::run(bool& close){
             Menu::DrawLevelMenu();
             break;
         }
-        // case 2:
-        // {
-            // load game 
-        // }
+        case LOAD_GAME_MENU:
+        {
+            Menu::DrawLoadGame();
+            break;
+        }
         case SCOREBOARD:
         {
             Menu::DrawScoreboard();
@@ -51,10 +53,11 @@ void Game::run(bool& close){
             Menu::DrawChooseCharacter();
             break;
         }
-        // case STATUS_MENU:
-        // {
-            
-        // }
+        case STATUS_MENU:
+        {
+            Menu::DrawExitMenu();
+            break;
+        }
         case PLAY_GAME:
         {
             frames %= 300;
@@ -75,9 +78,25 @@ void Game::run(bool& close){
             Menu::DrawPlayGame();
             break;
         }
+        case LOADING_PHASE:
+        {
+            LoadingSecond--;
+            Menu::DrawLoadingPhase();
+            break;
+        }
         case LOSE_MENU:
         {
             Menu::DrawLoseMenu();
+            break;
+        }
+        case LOAD_GAME_PLAY:
+        {
+            Menu::DrawLoadGameWhilePlay();
+            break;
+        }
+        case SAVE_GAME:
+        {
+            Menu::DrawSaveGame();
             break;
         }
         default:
