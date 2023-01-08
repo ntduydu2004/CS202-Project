@@ -359,7 +359,7 @@ void Menu::DrawLoadGameWhilePlay(){
 void Menu::SaveGame(){
     ofstream fout;
     fout.open(FilePath + "/gamestate.txt");
-    fout << level << " " << score << " " << characterIndex << " " << TrafficLight << " " << TrafficLightSecond << '\n';
+    fout << acceleration << " " << level << " " << score << " " << characterIndex << " " << TrafficLight << " " << TrafficLightSecond << '\n';
     character[characterIndex].Save(fout);
     GameMap.Save(fout);
     fout.close();
@@ -368,7 +368,7 @@ void Menu::SaveGame(){
 void Menu::LoadGame(){
     ifstream fin;
     fin.open(FilePath + "/gamestate.txt");
-    fin >> level >> score >> characterIndex >> TrafficLight >> TrafficLightSecond;
+    fin >> acceleration >> level >> score >> characterIndex >> TrafficLight >> TrafficLightSecond;
     character[characterIndex].Load(fin);
     GameMap.Load(fin);
     fin.close();
