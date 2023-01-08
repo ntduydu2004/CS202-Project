@@ -692,3 +692,57 @@ void Menu::DrawPlayGame() {
     DrawText(TextFormat("SCORE: %i", score/3), 20, 80, 30, VIOLET);
     EndDrawing();
 }
+void Menu::DrawScoreboard(){
+    if (CheckCollisionPointRec(mousePosition, rec_ScoreBoard[0]))
+        {indexMouse = 1; SetMouseCursor(4);}
+    else if (CheckCollisionPointRec(mousePosition, rec_ScoreBoard[1]))
+        {indexMouse = 2; SetMouseCursor(4);}
+    else 
+        indexMouse = 0;
+    
+    if (IsMouseButtonPressed(0))
+    {
+        if (CheckCollisionPointRec(mousePosition, rec_ScoreBoard[0])){
+            numScore = 0;
+            ScoreList.clear();
+            UserScoreList.clear();
+            ScoreLevel.clear();
+            record = 0;
+        }
+        if (CheckCollisionPointRec(mousePosition, rec_ScoreBoard[1])) menu = 0;
+    }
+    BeginDrawing();
+    ClearBackground(GetColor(0x052c46ff));
+    DrawTextureEx(background, (Vector2){-150, 0}, 0.0f, 1.2f, WHITE);
+    if (numScore) DrawRectangle(80, GetScreenHeight()/2 - 180, GetScreenWidth() - 160, 300, DARKBROWN);
+    DrawRectangle(rec_ScoreBoard[0].x, rec_ScoreBoard[0].y, rec_ScoreBoard[0].width, rec_ScoreBoard[0].height, BLUE);
+    DrawRectangle(rec_ScoreBoard[1].x, rec_ScoreBoard[1].y, rec_ScoreBoard[1].width, rec_ScoreBoard[1].height, BLUE);
+    if (indexMouse) {
+        DrawRectangle(rec_ScoreBoard[indexMouse - 1].x, rec_ScoreBoard[indexMouse - 1].y, rec_ScoreBoard[indexMouse - 1].width, rec_ScoreBoard[indexMouse - 1].height, Fade(DARKBLUE, 0.3f));
+        DrawRectangleLines(rec_ScoreBoard[indexMouse - 1].x, rec_ScoreBoard[indexMouse - 1].y, rec_ScoreBoard[indexMouse - 1].width, rec_ScoreBoard[indexMouse - 1].height, DARKBLUE);
+    }
+    if (numScore == 0){
+        DrawText("THERE IS NO ACHIEVEMENT HERE!!", GetScreenWidth() / 2 - MeasureText("THERE IS NO ACHIEVEMENT HERE!!", 50)/2, GetScreenHeight() / 2 - 230, 50, MAROON);
+    }
+    else{
+        DrawText("SCOREBOARD", GetScreenWidth() / 2 - MeasureText("SCOREBOARD", 50)/2, GetScreenHeight() / 2 - 290, 50, MAROON);
+        DrawText(TextFormat("RECORD: %i", record), GetScreenWidth() / 2 - MeasureText(TextFormat("RECORD: %i", record), 30)/2, GetScreenHeight() / 2 - 230, 30, DARKPURPLE);
+        for (int i = numScore - 1; i >= 0; i--){
+            DrawText(TextFormat("%i", numScore - i), 100, GetScreenHeight() / 2 - 220 + (numScore - i)*60, 30, RAYWHITE);
+            DrawText(UserScoreList[i].c_str(), 250, GetScreenHeight() / 2 - 220 + (numScore - i)*60, 30, RAYWHITE);
+            if (ScoreLevel[i] == 1){
+                DrawText("EASY", 650, GetScreenHeight() / 2 - 220 + (numScore - i)*60, 30, RAYWHITE);
+            }
+            if (ScoreLevel[i] == 2){
+                DrawText("MEDIUM", 650, GetScreenHeight() / 2 - 220 + (numScore - i)*60, 30, RAYWHITE);
+            }
+            if (ScoreLevel[i] == 3){
+                DrawText("HARD", 650, GetScreenHeight() / 2 - 220 + (numScore - i)*60, 30, RAYWHITE);
+            }
+            DrawText(TextFormat("%i", ScoreList[i]), 800, GetScreenHeight() / 2 - 220 + (numScore - i)*60, 30, RAYWHITE);
+        }
+    }
+    DrawText(" CLEAR ", GetScreenWidth() / 2 - 60, GetScreenHeight() / 2 + 150, 30, RAYWHITE);
+    DrawText(" BACK ", GetScreenWidth() / 2 - 50, GetScreenHeight() / 2 + 210, 30, RAYWHITE);
+    EndDrawing();
+}

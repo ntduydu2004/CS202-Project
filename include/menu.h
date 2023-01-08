@@ -141,4 +141,5 @@ public:
     void DrawChooseCharacter();
     void DrawInstructions();
     void DrawPlayGame();
+    void DrawScoreboard();
 };
